@@ -24,4 +24,5 @@ Route::group([
 ],function(){
     Route::post('login','App\Http\Controllers\Api\AuthController@login');
     Route::post('signup','App\Http\Controllers\Api\AuthController@signup');
+    Route::get('logout','App\Http\Controllers\Api\AuthController@logout');
 });
