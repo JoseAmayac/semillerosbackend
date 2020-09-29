@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SignUpRequest;
 use Laravel\Passport\Client as OClient; 
+use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
-
 class AuthController extends Controller
 {
     public function login(Request $request){
@@ -56,20 +56,18 @@ class AuthController extends Controller
     }
 
     public function getTokenAndRefreshToken($oClient,$email,$password){
-        $http = new GuzzleHttp\Client;
-
-        $response = $http->request('POST', 'http://localhost:8000/oauth/token', [
-            'form_params' => [
-                'grant_type' => 'password',
-                'client_id' => $oClient->id,
-                'client_secret' => $oClient->secret,
-                'username' => $email,
-                'password' => $password,
-                'scope' => '*',
-            ],
+        $response = Http::timeout(3)->post('http://localhost:3110/oauth/token', [
+            "username" => $email,
+            "password" => $password,
+            "grant_type" => "password",
+            "client_id" => $oClient->id,
+            "client_secret" => $oClient->secret,
+            "scope" => "",
         ]);
-
         $result = json_decode((string) $response->getBody(), true);
-        return response()->json($result, $this->successStatus);
+        return response()->json([
+            'authaccess'=>$result,
+            'user' => Auth::user()
+        ]);
     }
 }
