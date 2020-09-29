@@ -22,18 +22,6 @@ class AuthController extends Controller
         }
         $oClient = OClient::where('password_client', 1)->first();
         return $this->getTokenAndRefreshToken($oClient,request('email'), request('password'));
-        // $user = $request->user();
-        // $tokenResult = $user->createToken('Personal Access Token');
-
-        // $token = $tokenResult->token;
-        // $token->save();
-
-        // return response()->json([
-        //     $tokenResult,
-        //     'access_token' => $tokenResult->accessToken,
-        //     'token_type' => 'Bearer',
-        //     'user' => $user
-        // ]);
     }
 
     public function signup(SignUpRequest $request){
@@ -69,5 +57,11 @@ class AuthController extends Controller
             'authaccess'=>$result,
             'user' => Auth::user()
         ]);
+    }
+
+    public function me(){
+        return response()->json([
+            'user' => request('user')
+        ],200);
     }
 }
