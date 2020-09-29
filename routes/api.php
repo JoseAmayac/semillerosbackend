@@ -22,7 +22,7 @@ Route::group([
     'prefix' => 'auth',
     'middleware' => 'api'
 ],function(){
-    Route::post('login','Api\AuthController@login');
-    Route::post('signup','Api\AuthController@signup');
+    Route::post('login','App\Http\Controllers\Api\AuthController@login');
+    Route::post('signup','App\Http\Controllers\Api\AuthController@signup');
 });
     
