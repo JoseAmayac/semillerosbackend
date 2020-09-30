@@ -56,9 +56,9 @@ class AuthController extends Controller
     }
 
     public function getTokenAndRefreshToken($oClient,$email,$password){
-        $http = new GuzzleHttp\Client;
+        $http = new Client;
 
-        $response = $http->request('POST', 'http://localhost:8000/oauth/token', [
+        $response = $http->request('POST', 'http://localhost:3190/oauth/token', [
             'form_params' => [
                 'grant_type' => 'password',
                 'client_id' => $oClient->id,
@@ -68,6 +68,7 @@ class AuthController extends Controller
                 'scope' => '*',
             ],
         ]);
+        return "Hola";
 
         $result = json_decode((string) $response->getBody(), true);
         return response()->json($result, $this->successStatus);
