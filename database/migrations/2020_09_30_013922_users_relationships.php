@@ -14,13 +14,13 @@ class UsersRelationships extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('department_id');
+            $table->unsignedBigInteger('department_id')->nullable();
             $table->foreign('department_id')->references('id')->on('departments');
-            $table->unsignedBigInteger('program_id');
+            $table->unsignedBigInteger('program_id')->nullable();
             $table->foreign('program_id')->references('id')->on('programs');
-            $table->unsignedBigInteger('group_id');
+            $table->unsignedBigInteger('group_id')->nullable();
             $table->foreign('group_id')->references('id')->on('groups');
-            $table->unsignedBigInteger('seedling_id');
+            $table->unsignedBigInteger('seedling_id')->nullable();
             $table->foreign('seedling_id')->references('id')->on('seedlings');
         });
     }

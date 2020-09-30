@@ -27,3 +27,16 @@ Route::group([
     Route::get('logout','App\Http\Controllers\Api\AuthController@logout');
     Route::get('me','App\Http\Controllers\Api\AuthController@me');
 });
+
+Route::group([
+    'prefix' => 'v1',
+    'middleware' => 'api'
+],function(){
+    Route::apiResource('users','App\Http\Controllers\Api\UserController');
+    Route::apiResource('departments','App\Http\Controllers\Api\DepartmentController');
+    Route::apiResource('groups','App\Http\Controllers\Api\GroupController');
+    Route::apiResource('lines','App\Http\Controllers\Api\LineController');
+    Route::apiResource('programs','App\Http\Controllers\Api\ProgramController');
+    Route::apiResource('publications','App\Http\Controllers\Api\PublicationController');
+    Route::apiResource('seedlings','App\Http\Controllers\Api\SeedlingController');
+});

@@ -25,12 +25,12 @@ class AuthController extends Controller
     }
 
     public function signup(SignUpRequest $request){
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
-        ]);
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password);
+        $user = User::create($data);
 
+        $user->assignRole('Estudiante');
+        $user->save();
         return $this->login($request);
     }
 
@@ -44,7 +44,6 @@ class AuthController extends Controller
     }
 
     public function getTokenAndRefreshToken($oClient,$email,$password){
-<<<<<<< HEAD
         $http = new Client;
 
         $response = $http->request('POST', 'http://localhost:3190/oauth/token', [
@@ -57,22 +56,12 @@ class AuthController extends Controller
                 'scope' => '*',
             ],
         ]);
-        return "Hola";
-
-=======
-        $response = Http::timeout(3)->post('http://localhost:3110/oauth/token', [
-            "username" => $email,
-            "password" => $password,
-            "grant_type" => "password",
-            "client_id" => $oClient->id,
-            "client_secret" => $oClient->secret,
-            "scope" => "",
-        ]);
->>>>>>> eae13fb8307ec024793d470820f093c66f1a8839
         $result = json_decode((string) $response->getBody(), true);
+        $user = Auth::user();
+        $user->roles;
         return response()->json([
             'authaccess'=>$result,
-            'user' => Auth::user()
+            'user' => $user
         ]);
     }
 

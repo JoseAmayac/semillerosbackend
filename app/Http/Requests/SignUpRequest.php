@@ -27,6 +27,8 @@ class SignUpRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
+            'cellphone' => 'required|min:6|max:12',
+            'program_id' => 'required|exists:programs,id'
         ];
     }
     public function messages()
@@ -37,6 +39,11 @@ class SignUpRequest extends FormRequest
             'email.email' => 'El correo electrónico no es válido.',
             'email.unique' => 'El correo electrónico se encuentra en uso.',
             'password.required' => 'La contraseña es obligatoria.',
+            'cellphone.required' => 'El número de celular es obligatorio',
+            'cellphone.min' => 'El número de celular debe contener al menos 6 caracteres',
+            'cellphone.max' => 'El número de celular no puede contener más de 12 caracteres',
+            'program_id.required' => 'El programa académico es obligatorio',
+            'program_id.exists' => 'El programa académico seleccionado no existe'
         ];
     }
 }
