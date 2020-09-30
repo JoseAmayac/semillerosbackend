@@ -13,4 +13,17 @@ class Department extends Model
         'name',
         'description'
     ];
+
+    public function programs(){
+        return $this->hasMany(Program::class);
+    }
+
+    public function groups(){
+        return $this->hasMany(Group::class);
+    }
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
+
 }

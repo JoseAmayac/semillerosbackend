@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Line extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'description',
+        'group_id'
+    ];
+
+    public function group(){
+        return $this->belongsTo(Group::class);
+    }
 }
