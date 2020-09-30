@@ -44,6 +44,22 @@ class AuthController extends Controller
     }
 
     public function getTokenAndRefreshToken($oClient,$email,$password){
+<<<<<<< HEAD
+        $http = new Client;
+
+        $response = $http->request('POST', 'http://localhost:3190/oauth/token', [
+            'form_params' => [
+                'grant_type' => 'password',
+                'client_id' => $oClient->id,
+                'client_secret' => $oClient->secret,
+                'username' => $email,
+                'password' => $password,
+                'scope' => '*',
+            ],
+        ]);
+        return "Hola";
+
+=======
         $response = Http::timeout(3)->post('http://localhost:3110/oauth/token', [
             "username" => $email,
             "password" => $password,
@@ -52,6 +68,7 @@ class AuthController extends Controller
             "client_secret" => $oClient->secret,
             "scope" => "",
         ]);
+>>>>>>> eae13fb8307ec024793d470820f093c66f1a8839
         $result = json_decode((string) $response->getBody(), true);
         return response()->json([
             'authaccess'=>$result,
