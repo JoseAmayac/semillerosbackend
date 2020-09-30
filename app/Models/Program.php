@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Program extends Model
 {
     use HasFactory;
+
+    public function department(){
+        return $this->belongsTo(Department::class);
+    }
+
+    public function students(){
+        return $this->hasMany(User::class);
+    }
+
+    public function coordinator(){
+        return $this->hasOne(User::class,'coordinator_id');
+    }
 }

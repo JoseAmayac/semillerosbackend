@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Seedling extends Model
 {
     use HasFactory;
+
+    public function group(){
+        return $this->belongsTo(Group::class);
+    }
+
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
+
+
+
 }

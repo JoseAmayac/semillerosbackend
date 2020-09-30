@@ -19,6 +19,8 @@ class CreatePublicationsTable extends Migration
             $table->string("link");
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('group_id');
+            $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();
         });
     }
