@@ -25,4 +25,5 @@ Route::group([
     Route::post('login','App\Http\Controllers\Api\AuthController@login');
     Route::post('signup','App\Http\Controllers\Api\AuthController@signup');
     Route::get('logout','App\Http\Controllers\Api\AuthController@logout');
+    Route::get('me','App\Http\Controllers\Api\AuthController@me');
 });
