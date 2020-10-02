@@ -5,9 +5,14 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Group;
 use Illuminate\Http\Request;
+use App\Http\Requests\GroupRequest;
 
 class GroupController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth:api")->only("store", "update", "delete");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +20,8 @@ class GroupController extends Controller
      */
     public function index()
     {
-        //
+        $groups = Group::all();
+        return response()->json(['groups'=>$groups], 200);
     }
 
     /**
@@ -24,9 +30,10 @@ class GroupController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GroupRequest $request)
     {
-        //
+        $group = Group::create($request->all());
+        return response()->json(['group'=>$group], 201);
     }
 
     /**
@@ -37,7 +44,7 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        //
+        return response()->json(['group', $group], 200);
     }
 
     /**
@@ -47,9 +54,10 @@ class GroupController extends Controller
      * @param  \App\Models\Group  $group
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Group $group)
+    public function update(GroupRequest $request, Group $group)
     {
-        //
+        $group->update($request->all());
+        return response()->json(['group'=>$group], 201);
     }
 
     /**
@@ -60,6 +68,7 @@ class GroupController extends Controller
      */
     public function destroy(Group $group)
     {
-        //
+        $group->delete();
+        return response()->json(['message', 'Grupo eliminado correctamente'], 204);
     }
 }

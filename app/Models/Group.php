@@ -11,7 +11,8 @@ class Group extends Model
 
     protected $fillable = [
         'name',
-        'description'
+        'description',
+        'department_id'
     ];
 
     public function department(){

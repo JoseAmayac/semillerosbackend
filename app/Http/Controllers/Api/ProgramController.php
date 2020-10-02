@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class ProgramController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware("auth:api")->only("store", "update", "delete");
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +20,8 @@ class ProgramController extends Controller
      */
     public function index()
     {
-        //
+        $programs = Program::all();
+        return response()->json(['programs', $programs], 200);
     }
 
     /**
@@ -43,7 +48,7 @@ class ProgramController extends Controller
      */
     public function show(Program $program)
     {
-        //
+        return response()->json(['program', $program], 200);
     }
 
     /**
@@ -53,9 +58,10 @@ class ProgramController extends Controller
      * @param  \App\Models\Program  $program
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Program $program)
+    public function update(ProgramRequest $request, Program $program)
     {
-        //
+        $program->update($request->all());
+        return response()->json(['program', $program], 201);
     }
 
     /**
@@ -66,6 +72,7 @@ class ProgramController extends Controller
      */
     public function destroy(Program $program)
     {
-        //
+        $program->delete();
+        return response()->json(['message', 'Programa eliminado correctamente'], 204);
     }
 }
