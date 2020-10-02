@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LineRequest;
 use App\Models\Line;
 use Illuminate\Http\Request;
 
 class LineController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api')->only('store','update','delete');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,11 @@ class LineController extends Controller
      */
     public function index()
     {
-        //
+        $lines = Line::all();
+
+        return response()->json([
+            'lines' => $lines
+        ],200);
     }
 
     /**
@@ -24,9 +34,13 @@ class LineController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(LineRequest $request)
     {
-        //
+        $line = Line::create($request->all());
+
+        return response()->json([
+            'line' => $line
+        ],201);
     }
 
     /**
@@ -37,7 +51,9 @@ class LineController extends Controller
      */
     public function show(Line $line)
     {
-        //
+        return response()->json([
+            'line' => $line
+        ],200);
     }
 
     /**
@@ -47,9 +63,13 @@ class LineController extends Controller
      * @param  \App\Models\Line  $line
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Line $line)
+    public function update(LineRequest $request, Line $line)
     {
-        //
+        $line->update($request->all());
+
+        return response()->json([
+            'line' => $line
+        ],200);
     }
 
     /**
@@ -60,6 +80,10 @@ class LineController extends Controller
      */
     public function destroy(Line $line)
     {
-        //
+        $line->delete();
+
+        return response()->json([
+            'message' => 'Linea de investigación eliminada correctamente'
+        ],204);
     }
 }

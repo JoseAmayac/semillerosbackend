@@ -10,10 +10,10 @@ class Publication extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
         'group_id',
-        'user_id'
+        'user_id',
+        'link',
+        'references'
     ];
 
     public function group(){

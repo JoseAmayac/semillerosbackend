@@ -3,11 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PublicationRequest;
 use App\Models\Publication;
 use Illuminate\Http\Request;
 
 class PublicationController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api')->except('index','show');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,11 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        //
+        $publications = Publication::all();
+
+        return response()->json([
+            'publications' => $publications
+        ],200);
     }
 
     /**
@@ -24,9 +34,13 @@ class PublicationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PublicationRequest $request)
     {
-        //
+        $publication = Publication::create($request->all());
+
+        return response()->json([
+            'publication' => $publication
+        ],201);
     }
 
     /**
@@ -37,7 +51,9 @@ class PublicationController extends Controller
      */
     public function show(Publication $publication)
     {
-        //
+        return response()->json([
+            'publication' => $publication
+        ],200);
     }
 
     /**
@@ -47,9 +63,13 @@ class PublicationController extends Controller
      * @param  \App\Models\Publication  $publication
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Publication $publication)
+    public function update(PublicationRequest $request, Publication $publication)
     {
-        //
+        $publication->update($request->all());
+
+        return response()->json([
+            'publication' => $publication
+        ],200);
     }
 
     /**
@@ -60,6 +80,10 @@ class PublicationController extends Controller
      */
     public function destroy(Publication $publication)
     {
-        //
+        $publication->delete();
+
+        return response()->json([
+            'message' => 'Publicación eliminada correctamente'
+        ],204);
     }
 }

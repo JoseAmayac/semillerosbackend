@@ -3,11 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SignUpRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+
+        return response()->json([
+            'users' => $users
+        ],200);
     }
 
     /**
@@ -24,9 +35,13 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SignUpRequest $request)
     {
-        //
+        $user = User::create($request->all());
+
+        return response()->json([
+            'user' => $user
+        ],201);
     }
 
     /**
@@ -37,7 +52,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return response()->json([
+            'user' => $user
+        ],200);
     }
 
     /**
@@ -47,9 +64,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(SignUpRequest $request, User $user)
     {
-        //
+        $user = tap($user)->update($request->all());
+
+        return response()->json([
+            'user' => $user
+        ],200);
     }
 
     /**
@@ -60,6 +81,10 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return response()->json([
+            'message' => 'Usuario eliminado correctamente'
+        ],204);
     }
 }
