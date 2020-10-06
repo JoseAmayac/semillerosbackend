@@ -54,7 +54,7 @@ class SeedlingController extends Controller
      * @param  \App\Models\Seedling  $seedling
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Seedling $seedling)
+    public function update(SeedlingRequest $request, Seedling $seedling)
     {
         $seedling->update($request->all());
         return response()->json(['seedling', $seedling], 201);
