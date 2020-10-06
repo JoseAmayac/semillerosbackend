@@ -24,9 +24,45 @@ class DepartmentController extends Controller
 
         return response()->json([
             'departments' => $departments
-        ]);
+        ], 201);
     }
 
+    /**
+     * @OA\Post(
+     ** path="/",
+     *   tags={"Department"},
+     *   summary="Store new department",
+     *   operationId="storeDepartment",
+     *
+     *  @OA\Parameter(
+     *      name="name",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="description",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Invalid Data"
+     *   )
+     *)
+     **/
     /**
      * Store a newly created resource in storage.
      *
@@ -36,13 +72,55 @@ class DepartmentController extends Controller
     public function store(DepartmentRequest $request)
     {
         $department = Department::create($request->all());
-
         return response()->json([
             'message' => 'Departamento creado correctamente',
             'department' => $department
         ],201);
     }
 
+    /**
+     * @OA\Get(
+     *      path="/departments/{id}",
+     *      operationId="getDepartmentById",
+     *      tags={"Departments"},
+     *      summary="Get department information",
+     *      description="Returns department data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Department id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Parameter(
+     *          name="name",
+     *          in="query",
+     *          required=true,
+     *       @OA\Schema(
+     *            type="string"
+     *        )
+     *       ),
+     *       @OA\Parameter(
+     *         name="description",
+     *         in="query",
+     *         required=true,
+    *         @OA\Schema(
+    *               type="string"
+    *          )
+    *         ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         response=201,
+     *         description="Success",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *         )
+     *      )
+     *  )
+     */
     /**
      * Display the specified resource.
      *
@@ -56,6 +134,28 @@ class DepartmentController extends Controller
         ],200);
     }
 
+    /**
+     * @OA\Put(
+     *      path="/departments/{id}",
+     *      operationId="updateDepartment",
+     *      tags={"Departments"},
+     *      summary="Update existing department",
+     *      description="Returns updated department data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="Department id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *      )
+     * )
+     */
     /**
      * Update the specified resource in storage.
      *

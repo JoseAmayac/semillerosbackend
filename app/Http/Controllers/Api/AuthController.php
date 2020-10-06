@@ -14,13 +14,61 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkauth:api')->only('me','logout');    
+        $this->middleware('checkauth')->only('me','logout');    
     }
+    /**
+     * @OA\Post(
+     ** path="/api/auth/login",
+     *   tags={"Login"},
+     *   summary="Login",
+     *   operationId="login",
+     *
+     *   @OA\Parameter(
+     *      name="email",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *      name="password",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *          type="string"
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="Correo electrónico o contraseña inválidos",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *  )
+     *)
+     **/
+    /**
+     * login api
+     *
+     * @return \Illuminate\Http\Response
+     */
 
 
     public function login(Request $request){
-        $credentials = request(['email', 'password']);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
+        $credentials = request(['email', 'password']);
         if (!Auth::attempt($credentials)){
             return response()->json([
                 'message' => 'Correo electrónico o contraseña incorrectos'
@@ -30,6 +78,91 @@ class AuthController extends Controller
         return $this->getTokenAndRefreshToken($oClient,request('email'), request('password'));
     }
 
+
+    /**
+     * @OA\Post(
+     ** path="/api/auth/signup",
+     *   tags={"Sign Up"},
+     *   summary="Sign Up",
+     *   operationId="sign up",
+     *
+     *  @OA\Parameter(
+     *      name="name",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="lastname",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="email",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *       name="cellphone",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *      name="password",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *      @OA\Parameter(
+     *      name="password_confirmation",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *     @OA\Parameter(
+     *      name="program_id",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=422,
+     *       description="Error: Unprocessable Entity",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *  )
+     *)
+     **/
+    /**
+     * Register api
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function signup(SignUpRequest $request){
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
@@ -40,15 +173,44 @@ class AuthController extends Controller
         return $this->login($request);
     }
 
+
+    /**
+     * @OA\GET(
+     ** path="/api/auth/logout",
+     *   tags={"Logout"},
+     *   summary="Logout",
+     *   operationId="logout",
+     *   security={{"bearerAuth":{}}},
+     *   @OA\Response(
+     *      response=203,
+     *       description="Cierre de sesion correcto",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="El token de autenticación expiró | Token de autenticacion invalido",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *    )
+     * )
+     * 
+     **/
+    /**
+     * logout api
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
-
         return response()->json([
             'message' => 'Cierre se sesión correcto'
         ],203);
     }
-
+    
     public function getTokenAndRefreshToken($oClient,$email,$password){
         $http = new Client;
 
@@ -71,6 +233,34 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * @OA\GET(
+     ** path="/api/auth/me",
+     *   tags={"Me"},
+     *   summary="Me",
+     *   operationId="me",
+     *   security={{"bearerAuth":{}}},
+     *  @OA\Response(
+     *      response=200,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="El token de autenticación expiró | Token de autenticacion invalido",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *    )
+     * )
+     */
+    /**
+     * me api
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function me(){
         return response()->json([
             'user' => Auth::user()
