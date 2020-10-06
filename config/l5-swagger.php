@@ -1,11 +1,14 @@
 <?php
 
+use function PHPSTORM_META\type;
+
 return [
     'default' => 'default',
     'documentations' => [
         'default' => [
             'api' => [
                 'title' => 'L5 Swagger UI',
+                'checktoken'
             ],
 
             'routes' => [
@@ -118,9 +121,9 @@ return [
                 ],
                 */
 
-                /* Open API 3.0 support
+                //Open API 3.0 support
                 'passport' => [ // Unique name of security
-                    'type' => 'oauth2', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
+                    'type' => 'basic', // The type of the security scheme. Valid values are "basic", "apiKey" or "oauth2".
                     'description' => 'Laravel passport oauth2 security.',
                     'in' => 'header',
                     'scheme' => 'https',
@@ -133,7 +136,13 @@ return [
                         ],
                     ],
                 ],
-                */
+                'bearerAuth' => [
+                    'type' => 'apiKey',
+                    'description' => 'Enter token in format (Bearer <token>)',
+                    'in' => 'header',
+                    'scheme' => 'http',
+                    'name' => 'Authorization',
+                ],
             ],
             'security' => [
                 /*

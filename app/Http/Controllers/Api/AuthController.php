@@ -18,7 +18,7 @@ class AuthController extends Controller
     }
     /**
      * @OA\Post(
-     ** path="/v1/user-login",
+     ** path="/api/auth/login",
      *   tags={"Login"},
      *   summary="Login",
      *   operationId="login",
@@ -48,8 +48,11 @@ class AuthController extends Controller
      *   ),
      *   @OA\Response(
      *      response=401,
-     *       description="Correo electrónico o contraseña incorrectos"
-     *   )
+     *       description="Correo electrónico o contraseña inválidos",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *  )
      *)
      **/
     /**
@@ -77,7 +80,7 @@ class AuthController extends Controller
 
     /**
      * @OA\Post(
-     ** path="/v1/user-register",
+     ** path="/api/auth/signup",
      *   tags={"Sign Up"},
      *   summary="Sign Up",
      *   operationId="sign up",
@@ -131,7 +134,7 @@ class AuthController extends Controller
      *      )
      *   ),
      *     @OA\Parameter(
-     *      name="department_id",
+     *      name="program_id",
      *      in="query",
      *      required=true,
      *      @OA\Schema(
@@ -146,9 +149,12 @@ class AuthController extends Controller
      *      )
      *   ),
      *   @OA\Response(
-     *      response=401,
-     *       description="Invalid Data"
-     *   )
+     *      response=422,
+     *       description="Error: Unprocessable Entity",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *  )
      *)
      **/
     /**
@@ -176,20 +182,12 @@ class AuthController extends Controller
 
 
     /**
-     * @OA\Post(
-     ** path="/v1/user-logout",
-     *   tags={"Login"},
-     *   summary="Login",
-     *   operationId="login",
-     *
-     *   @OA\Parameter(
-     *      name="token",
-     *      in="query",
-     *      required=true,
-     *      @OA\Schema(
-     *           type="string"
-     *      )
-     *   ),
+     * @OA\GET(
+     ** path="/api/auth/logout",
+     *   tags={"Logout"},
+     *   summary="Logout",
+     *   operationId="logout",
+     *   security={{"bearerAuth":{}}},
      *   @OA\Response(
      *      response=203,
      *       description="Cierre de sesion correcto",
@@ -197,11 +195,15 @@ class AuthController extends Controller
      *           mediaType="application/json",
      *      )
      *   ),
-     *  @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *  )
-     *)
+     *   @OA\Response(
+     *      response=401,
+     *       description="El token de autenticación expiró | Token de autenticacion invalido",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *    )
+     * )
+     * 
      **/
     /**
      * logout api
@@ -240,10 +242,11 @@ class AuthController extends Controller
 
     /**
      * @OA\GET(
-     ** path="/v1/me",
-     *   tags={"Login"},
-     *   summary="Login",
-     *   operationId="login",
+     ** path="/api/auth/me",
+     *   tags={"Me"},
+     *   summary="Me",
+     *   operationId="me",
+     *   security={{"bearerAuth":{}}},
      *  @OA\Response(
      *      response=200,
      *       description="Success",
@@ -251,10 +254,13 @@ class AuthController extends Controller
      *           mediaType="application/json",
      *      )
      *   ),
-     *  @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *   )
+     *   @OA\Response(
+     *      response=401,
+     *       description="El token de autenticación expiró | Token de autenticacion invalido",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *    )
      * )
      */
     /**

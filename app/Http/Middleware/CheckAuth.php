@@ -41,7 +41,6 @@ class CheckAuth extends CheckCredentials
                 ],401); 
             }
         }
-
         return $next($request);
     }
 

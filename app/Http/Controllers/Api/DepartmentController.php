@@ -14,24 +14,6 @@ class DepartmentController extends Controller
         $this->middleware('checkauth')->except('index','show');
     }
     /**
-     * @OA\Get(
-     *      path="/api/departments",
-     *      operationId="getDepartmentList",
-     *      tags={"Departments"},
-     *      security={
-     *      {"passport": {}},
-     *      summary="Get list of departments",
-     *      description="Returns list of departments",
-     *      @OA\Response(
-     *          response=200,
-     *          description="Successful operation",
-     *          @OA\MediaType(
-     *           mediaType="application/json",
-     *          )
-     *      )
-     *  )
-     */
-    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -136,7 +118,8 @@ class DepartmentController extends Controller
      *         @OA\MediaType(
      *             mediaType="application/json",
      *         )
-     * )
+     *      )
+     *  )
      */
     /**
      * Display the specified resource.
@@ -167,15 +150,6 @@ class DepartmentController extends Controller
      *              type="integer"
      *          )
      *      ),
-     *      @OA\RequestBody(
-     *          required=true,
-     *          @OA\JsonContent(ref="#/components/schemas/UpdateProjectRequest")
-     *      ),
-     *      @OA\Response(
-     *          response=202,
-     *          description="Successful operation",
-     *          @OA\JsonContent(ref="#/components/schemas/Project")
-     *       ),
      *      @OA\Response(
      *          response=401,
      *          description="Unauthenticated",

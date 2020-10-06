@@ -24,7 +24,7 @@ class Controller extends BaseController
      * )
      *
      * @OA\Server(
-     *      url=L5_SWAGGER_CONST_HOST,
+     *      url="http://localhost:8000",
      *      description="Demo API Server"
      * )
      */
