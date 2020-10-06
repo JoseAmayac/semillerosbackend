@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Laravel\Passport\Exceptions\OAuthServerException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -33,5 +36,12 @@ class Handler extends ExceptionHandler
     public function register()
     {
         //
+    }
+
+    public function report(Throwable $e)
+    {
+        if ($e instanceof OAuthServerException) {
+            dd($e);
+        }
     }
 }

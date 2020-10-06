@@ -11,7 +11,7 @@ class GroupController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth:api")->only("store", "update", "destroy");
+        $this->middleware("checkauth")->only("store", "update", "delete");
     }
     /**
      * Display a listing of the resource.

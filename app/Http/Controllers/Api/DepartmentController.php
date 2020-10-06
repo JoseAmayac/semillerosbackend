@@ -11,7 +11,7 @@ class DepartmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth:api")->only("store", "update", "destroy");
+        $this->middleware('checkauth')->except('index','show');
     }
     /**
      * @OA\Get(

@@ -17,6 +17,7 @@
         "laravel/passport": "^10.0",
         "laravel/tinker": "^2.0",
         "spatie/laravel-permission": "^3.17",
+        "symfony/psr-http-message-bridge": "^2.0",
         "zircote/swagger-php": "^3.1"
     },
     "require-dev": {
