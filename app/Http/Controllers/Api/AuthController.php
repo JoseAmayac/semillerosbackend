@@ -14,7 +14,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('checkauth')->only('me','logout');    
+        $this->middleware('checkauth:api')->only('me','logout');    
     }
 
 
@@ -52,7 +52,7 @@ class AuthController extends Controller
     public function getTokenAndRefreshToken($oClient,$email,$password){
         $http = new Client;
 
-        $response = $http->request('POST', 'http://localhost:3180/oauth/token', [
+        $response = $http->request('POST', 'http://localhost:3190/oauth/token', [
             'form_params' => [
                 'grant_type' => 'password',
                 'client_id' => $oClient->id,

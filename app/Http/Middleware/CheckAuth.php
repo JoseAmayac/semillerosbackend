@@ -41,6 +41,7 @@ class CheckAuth extends CheckCredentials
                 ],401); 
             }
         }
+        $this->validate($psr, $scopes);
 
         return $next($request);
     }
