@@ -11,7 +11,7 @@ class ProgramController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("auth:api")->only("store", "update", "delete");
+        $this->middleware("checkauth")->only("store", "update", "delete");
     }
     /**
      * Display a listing of the resource.
