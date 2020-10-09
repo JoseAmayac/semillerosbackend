@@ -22,7 +22,7 @@ class SeedlingController extends Controller
      *      summary="Get seedlings information",
      *      description="Returns list of seedlings",
      *      @OA\Response(
-     *         response=201,
+     *         response=200,
      *         description="Successful operation",
      *         description="Success",
      *         @OA\MediaType(

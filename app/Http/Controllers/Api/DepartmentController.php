@@ -21,7 +21,7 @@ class DepartmentController extends Controller
      *      summary="Get departments information",
      *      description="Returns list of departments",
      *      @OA\Response(
-     *         response=201,
+     *         response=200,
      *         description="Successful operation",
      *         description="Success",
      *         @OA\MediaType(
@@ -150,7 +150,7 @@ class DepartmentController extends Controller
      *   summary="Update existing department",
      *   operationId="updateDepartment",
      *   security={{"bearerAuth":{}}},
-     *  @OA\Parameter(
+     *   @OA\Parameter(
      *          name="id",
      *          description="Department id",
      *          required=true,

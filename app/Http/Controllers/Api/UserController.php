@@ -23,7 +23,7 @@ class UserController extends Controller
      *      summary="Get users information",
      *      description="Returns list of users",
      *      @OA\Response(
-     *         response=201,
+     *         response=200,
      *         description="Success",
      *         @OA\MediaType(
      *             mediaType="application/json",

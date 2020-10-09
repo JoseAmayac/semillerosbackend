@@ -19,7 +19,7 @@ class ProgramController extends Controller
      * @OA\GET(
      *      path="/api/v1/programs",
      *      operationId="getPrograms",
-     *      tags={"All programs"},
+     *      tags={"Programs"},
      *      summary="Get all academic programs information",
      *      description="Returns all academic programs information",
      *      @OA\Response(
@@ -45,7 +45,7 @@ class ProgramController extends Controller
     /**
      * @OA\POST(
      **  path="/api/v1/programs",
-     *   tags={"Save Programs"},
+     *   tags={"Programs"},
      *   summary="Store new academic program",
      *   operationId="storeProgram",
      *   description="Store new academic program in the database ",
@@ -117,7 +117,7 @@ class ProgramController extends Controller
      * @OA\GET(
      *      path="/api/v1/programs/{id}",
      *      operationId="getProgramById",
-     *      tags={"Specify Program"},
+     *      tags={"Programs"},
      *      summary="Get Specify academic program information",
      *      description="Returns one academic program information",
      *      @OA\Parameter(
@@ -152,7 +152,7 @@ class ProgramController extends Controller
     /**
      * @OA\PUT(
      **  path="/api/v1/programs/{id}",
-     *   tags={"Academic program update"},
+     *   tags={"Programs"},
      *   summary="Update a specify academic program",
      *   description="Returns updated academic program data",
      *   operationId="updateProgram",
@@ -221,7 +221,7 @@ class ProgramController extends Controller
      * @OA\DELETE(
      *      path="/api/v1/programs/{id}",
      *      operationId="deleteProgramsById",
-     *      tags={"Delete Specify Program"},
+     *      tags={"Programs"},
      *      summary="Delete Specify academic program information",
      *      description="Return success message information",
      *      @OA\Parameter(

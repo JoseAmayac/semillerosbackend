@@ -22,7 +22,7 @@ class GroupController extends Controller
      *      summary="Get groups information",
      *      description="Returns list of departments",
      *      @OA\Response(
-     *         response=201,
+     *         response=200,
      *         description="Successful operation",
      *         description="Success",
      *         @OA\MediaType(

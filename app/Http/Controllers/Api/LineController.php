@@ -20,7 +20,7 @@ class LineController extends Controller
      * @OA\GET(
      *      path="/api/v1/lines",
      *      operationId="getLines",
-     *      tags={"All lines"},
+     *      tags={"Lines"},
      *      summary="Get all lines information",
      *      description="Returns all lines information",
      *      @OA\Response(
@@ -120,7 +120,7 @@ class LineController extends Controller
      * @OA\GET(
      *      path="/api/v1/lines/{id}",
      *      operationId="getLineById",
-     *      tags={"Specify line"},
+     *      tags={"Lines"},
      *      summary="Get Specify line information",
      *      description="Returns one line information",
      *      @OA\Parameter(
@@ -157,7 +157,7 @@ class LineController extends Controller
     /**
      * @OA\PUT(
      **  path="/api/v1/lines/{id}",
-     *   tags={"Lines update"},
+     *   tags={"Lines"},
      *   summary="Update a specify investigation lines",
      *   description="Returns updated investigation line data",
      *   operationId="updateLine",
@@ -229,7 +229,7 @@ class LineController extends Controller
      * @OA\DELETE(
      *      path="/api/v1/lines/{id}",
      *      operationId="deleteLineById",
-     *      tags={"Delete Specify line"},
+     *      tags={"Lines"},
      *      summary="Delete Specify line information",
      *      description="Return success message information",
      *      @OA\Parameter(
