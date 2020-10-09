@@ -13,6 +13,7 @@ class DepartmentController extends Controller
     {
         $this->middleware('checkauth')->except('index','show');
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +28,7 @@ class DepartmentController extends Controller
         ], 201);
     }
 
-        /**
+    /**
      * @OA\POST(
      ** path="/api/department",
      *   tags={"Department"},
@@ -72,11 +73,6 @@ class DepartmentController extends Controller
      *      )
      *    )
      * )
-     */
-    /**
-     * me api
-     *
-     * @return \Illuminate\Http\Response
      */
     /**
      * Store a newly created resource in storage.
