@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Integration Swagger in Laravel with Passport Auth Documentation",
-        "description": "Implementation of Swagger with in Laravel",
+        "title": "Documentación API semilleros",
+        "description": "Documentación de todos los end points disponibles en la API de semilleros de la UAM",
         "contact": {
-            "email": "admin@admin.com"
+            "email": "jose.amayac@autonoma.edu.co"
         },
         "license": {
             "name": "Apache 2.0",
@@ -15,7 +15,7 @@
     "servers": [
         {
             "url": "http://localhost:8000",
-            "description": "Demo API Server"
+            "description": "API server Semilleros UAM"
         }
     ],
     "paths": {
@@ -226,7 +226,7 @@
                 "description": "Returns list of departments",
                 "operationId": "getDepartments",
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {}
@@ -419,7 +419,7 @@
                 "description": "Returns list of departments",
                 "operationId": "getGroups",
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {}
@@ -614,7 +614,7 @@
         "/api/v1/lines": {
             "get": {
                 "tags": [
-                    "All lines"
+                    "Lines"
                 ],
                 "summary": "Get all lines information",
                 "description": "Returns all lines information",
@@ -691,7 +691,7 @@
         "/api/v1/lines/{id}": {
             "get": {
                 "tags": [
-                    "Specify line"
+                    "Lines"
                 ],
                 "summary": "Get Specify line information",
                 "description": "Returns one line information",
@@ -718,7 +718,7 @@
             },
             "put": {
                 "tags": [
-                    "Lines update"
+                    "Lines"
                 ],
                 "summary": "Update a specify investigation lines",
                 "description": "Returns updated investigation line data",
@@ -777,7 +777,7 @@
             },
             "delete": {
                 "tags": [
-                    "Delete Specify line"
+                    "Lines"
                 ],
                 "summary": "Delete Specify line information",
                 "description": "Return success message information",
@@ -812,7 +812,7 @@
         "/api/v1/programs": {
             "get": {
                 "tags": [
-                    "All programs"
+                    "Programs"
                 ],
                 "summary": "Get all academic programs information",
                 "description": "Returns all academic programs information",
@@ -828,7 +828,7 @@
             },
             "post": {
                 "tags": [
-                    "Save Programs"
+                    "Programs"
                 ],
                 "summary": "Store new academic program",
                 "description": "Store new academic program in the database ",
@@ -889,7 +889,7 @@
         "/api/v1/programs/{id}": {
             "get": {
                 "tags": [
-                    "Specify Program"
+                    "Programs"
                 ],
                 "summary": "Get Specify academic program information",
                 "description": "Returns one academic program information",
@@ -916,7 +916,7 @@
             },
             "put": {
                 "tags": [
-                    "Academic program update"
+                    "Programs"
                 ],
                 "summary": "Update a specify academic program",
                 "description": "Returns updated academic program data",
@@ -975,7 +975,7 @@
             },
             "delete": {
                 "tags": [
-                    "Delete Specify Program"
+                    "Programs"
                 ],
                 "summary": "Delete Specify academic program information",
                 "description": "Return success message information",
@@ -1241,7 +1241,7 @@
                 "description": "Returns list of seedlings",
                 "operationId": "getSeedlings",
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {}
@@ -1450,7 +1450,7 @@
                 "description": "Returns list of users",
                 "operationId": "getUsers",
                 "responses": {
-                    "201": {
+                    "200": {
                         "description": "Success",
                         "content": {
                             "application/json": {}

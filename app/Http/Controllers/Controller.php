@@ -12,10 +12,13 @@ class Controller extends BaseController
     /**
      * @OA\Info(
      *      version="1.0.0",
-     *      title="Integration Swagger in Laravel with Passport Auth Documentation",
-     *      description="Implementation of Swagger with in Laravel",
+     *      title="Documentación API semilleros",
+     *      description="Documentación de todos los end points disponibles en la API de semilleros de la UAM",
      *      @OA\Contact(
-     *          email="admin@admin.com"
+     *          email="jose.amayac@autonoma.edu.co"
+     *      ),
+     * *      @OA\Contact(
+     *          email="daniel.garciaa@autonoma.edu.co"
      *      ),
      *      @OA\License(
      *          name="Apache 2.0",
@@ -25,7 +28,7 @@ class Controller extends BaseController
      *
      * @OA\Server(
      *      url="http://localhost:8000",
-     *      description="Demo API Server"
+     *      description="API server Semilleros UAM"
      * )
      */
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
