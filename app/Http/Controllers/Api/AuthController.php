@@ -16,6 +16,7 @@ class AuthController extends Controller
     {
         $this->middleware('checkauth')->only('me','logout');    
     }
+
     /**
      * @OA\Post(
      ** path="/api/auth/login",
@@ -48,7 +49,7 @@ class AuthController extends Controller
      *   ),
      *   @OA\Response(
      *      response=401,
-     *       description="Correo electrónico o contraseña inválidos",
+     *       description="Correo electrónico o contraseña incorrectos",
      *      @OA\MediaType(
      *           mediaType="application/json",
      *      )
@@ -59,9 +60,7 @@ class AuthController extends Controller
      * login api
      *
      * @return \Illuminate\Http\Response
-     */
-
-
+    */
     public function login(Request $request){
         $request->validate([
             'email' => 'required|email',
@@ -266,6 +265,26 @@ class AuthController extends Controller
         ],200);
     }
 
+    /**
+    * @OA\Get(
+    *     path="/api/auth/refresh",
+    *     summary="Refresh token",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Auth access tokens",
+    *         @OA\MediaType(
+    *           mediaType="application/json",
+    *         )
+    *     ),
+    *     @OA\Response(
+    *         response="401",
+    *         description="Invalid verification token"
+    *         @OA\MediaType(
+    *           mediaType="application/json",
+    *         )
+    *     )
+    * )
+    */
     public function refreshToken(Request $request){
         $request->validate([
             'refresh_token' => 'required'
@@ -291,7 +310,7 @@ class AuthController extends Controller
         if ($tokenDecoded) {
             return response()->json([
                 'authaccess' => $tokenDecoded
-            ]);
+            ],200);
         }else{
             return response()->json([
                 'message' => 'Token de verificación invalido',

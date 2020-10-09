@@ -13,6 +13,23 @@ class DepartmentController extends Controller
     {
         $this->middleware('checkauth')->except('index','show');
     }
+
+    /**
+     * @OA\GET(
+     *      path="/api/v1/departments",
+     *      operationId="getDepartments",
+     *      tags={"All departments"},
+     *      summary="Get all departments information",
+     *      description="Returns all departments information",
+     *      @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *         )
+     *      )
+     *  )
+    */
     /**
      * @OA\GET(
      *      path="/api/v1/departments",
@@ -44,7 +61,7 @@ class DepartmentController extends Controller
         ], 201);
     }
 
-        /**
+    /**
      * @OA\POST(
      ** path="/api/v1/departments",
      *   tags={"Department"},
