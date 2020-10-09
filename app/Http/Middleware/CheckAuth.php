@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Passport\Http\Middleware\CheckCredentials;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Nyholm\Psr7\Factory\Psr17Factory;
@@ -19,6 +20,8 @@ class CheckAuth extends CheckCredentials
      */
     public function handle($request, Closure $next,...$scopes)
     {
+        Auth::shouldUse('api');
+
         $psr = (new PsrHttpFactory(
             new Psr17Factory,
             new Psr17Factory,
@@ -41,6 +44,8 @@ class CheckAuth extends CheckCredentials
                 ],401); 
             }
         }
+        $this->validate($psr, $scopes);
+
         return $next($request);
     }
 

@@ -63,10 +63,11 @@ class AuthController extends Controller
 
 
     public function login(Request $request){
-        $validator = User::make($request->all(), [
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed'
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
+
         $credentials = request(['email', 'password']);
         if (!Auth::attempt($credentials)){
             return response()->json([
@@ -162,14 +163,6 @@ class AuthController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function signup(SignUpRequest $request){
-        $validator = User::make($request->all(), [
-            'name' => 'required',
-            'lastname'=>'required',
-            'email' => 'required|email|unique:users',
-            'cellphone' => 'required|unique',
-            'password' => 'required|confirmed',
-            'department_id' => 'required' 
-        ]);
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
         $user = User::create($data);
@@ -220,7 +213,7 @@ class AuthController extends Controller
     public function getTokenAndRefreshToken($oClient,$email,$password){
         $http = new Client;
 
-        $response = $http->request('POST', 'http://localhost:3180/oauth/token', [
+        $response = $http->request('POST', 'http://localhost:3190/oauth/token', [
             'form_params' => [
                 'grant_type' => 'password',
                 'client_id' => $oClient->id,
