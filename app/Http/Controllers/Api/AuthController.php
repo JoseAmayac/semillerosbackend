@@ -77,7 +77,6 @@ class AuthController extends Controller
         return $this->getTokenAndRefreshToken($oClient,request('email'), request('password'));
     }
 
-
     /**
      * @OA\Post(
      ** path="/api/auth/signup",

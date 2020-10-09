@@ -27,14 +27,14 @@ class DepartmentController extends Controller
         ], 201);
     }
 
-    /**
-     * @OA\Post(
-     ** path="/",
+        /**
+     * @OA\POST(
+     ** path="/api/department",
      *   tags={"Department"},
      *   summary="Store new department",
      *   operationId="storeDepartment",
-     *
-     *  @OA\Parameter(
+     *   security={{"bearerAuth":{}}},
+     *   @OA\Parameter(
      *      name="name",
      *      in="query",
      *      required=true,
@@ -50,19 +50,34 @@ class DepartmentController extends Controller
      *           type="string"
      *      )
      *   ),
-     *   @OA\Response(
+     *  @OA\Response(
      *      response=201,
      *       description="Success",
      *      @OA\MediaType(
      *           mediaType="application/json",
      *      )
      *   ),
+     *  @OA\Response(
+     *      response=422,
+     *       description="Unprocessable Entity",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
      *   @OA\Response(
      *      response=401,
-     *       description="Invalid Data"
-     *   )
-     *)
-     **/
+     *       description="El token de autenticación expiró | Token de autenticacion invalido",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *    )
+     * )
+     */
+    /**
+     * me api
+     *
+     * @return \Illuminate\Http\Response
+     */
     /**
      * Store a newly created resource in storage.
      *
@@ -79,7 +94,7 @@ class DepartmentController extends Controller
     }
 
     /**
-     * @OA\Get(
+     * @OA\GET(
      *      path="/departments/{id}",
      *      operationId="getDepartmentById",
      *      tags={"Departments"},
@@ -113,7 +128,6 @@ class DepartmentController extends Controller
      *      @OA\Response(
      *         response=200,
      *         description="Successful operation",
-     *         response=201,
      *         description="Success",
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -154,6 +168,52 @@ class DepartmentController extends Controller
      *          response=401,
      *          description="Unauthenticated",
      *      )
+     * )
+     */
+        /**
+     * @OA\PUT(
+     ** path="/api/departments/{id}",
+     *   tags={"Department"},
+     *   summary="Store new department",
+     *   operationId="storeDepartment",
+     *   security={{"bearerAuth":{}}},
+     *   @OA\Parameter(
+     *      name="name",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="description",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *  @OA\Response(
+     *      response=422,
+     *       description="Unprocessable Entity",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="El token de autenticación expiró | Token de autenticacion invalido",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *    )
      * )
      */
     /**
