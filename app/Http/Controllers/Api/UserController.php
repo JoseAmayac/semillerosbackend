@@ -16,6 +16,22 @@ class UserController extends Controller
     }
 
     /**
+     * @OA\GET(
+     *      path="/api/v1/users",
+     *      operationId="getUsers",
+     *      tags={"Users"},
+     *      summary="Get users information",
+     *      description="Returns list of users",
+     *      @OA\Response(
+     *         response=201,
+     *         description="Success",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *         )
+     *      )
+     *  )
+     */
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,6 +45,85 @@ class UserController extends Controller
         ],200);
     }
 
+    /**
+     * @OA\Post(
+     ** path="/api/v1/users",
+     *   tags={"User"},
+     *   summary="Store new user",
+     *   operationId="storeUser",
+     *
+     *  @OA\Parameter(
+     *      name="name",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="lastname",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="email",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *       name="cellphone",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *      name="password",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *      @OA\Parameter(
+     *      name="password_confirmation",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *     @OA\Parameter(
+     *      name="program_id",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=422,
+     *       description="Error: Unprocessable Entity",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *  )
+     *)
+     **/
     /**
      * Store a newly created resource in storage.
      *
@@ -45,6 +140,31 @@ class UserController extends Controller
     }
 
     /**
+     * @OA\GET(
+     *      path="/api/v1/users/{id}",
+     *      operationId="getUserById",
+     *      tags={"User"},
+     *      summary="Get user information",
+     *      description="Returns user data",
+     *      @OA\Parameter(
+     *          name="id",
+     *          description="User id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *      ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Success",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *         )
+     *      )
+     *  )
+     */
+    /**
      * Display the specified resource.
      *
      * @param  \App\Models\User  $user
@@ -57,6 +177,93 @@ class UserController extends Controller
         ],200);
     }
 
+    /**
+     * @OA\PUT(
+     ** path="/api/v1/users/{id}",
+     *   tags={"User"},
+     *   summary="Update existing user",
+     *   operationId="updateUser",
+     *  @OA\Parameter(
+     *          name="id",
+     *          description="User id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *   ),
+     *  @OA\Parameter(
+     *      name="name",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="lastname",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *  @OA\Parameter(
+     *      name="email",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *       name="cellphone",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *   @OA\Parameter(
+     *      name="password",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *      @OA\Parameter(
+     *      name="password_confirmation",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="string"
+     *      )
+     *   ),
+     *     @OA\Parameter(
+     *      name="program_id",
+     *      in="query",
+     *      required=true,
+     *      @OA\Schema(
+     *           type="integer"
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=201,
+     *       description="Success",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=422,
+     *       description="Error: Unprocessable Entity",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *  )
+     *)
+     **/
     /**
      * Update the specified resource in storage.
      *
@@ -73,6 +280,38 @@ class UserController extends Controller
         ],200);
     }
 
+    /**
+     * @OA\DELETE(
+     **  path="/api/v1/users/{id}",
+     *   tags={"User"},
+     *   summary="Delete an existing user",
+     *   operationId="deleteUser",
+     *   security={{"bearerAuth":{}}},
+     *  @OA\Parameter(
+     *          name="id",
+     *          description="User id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *   ),
+     *  @OA\Response(
+     *      response=204,
+     *       description="No content",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="El token de autenticación expiró | Token de autenticacion invalido",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *    )
+     * )
+     */
     /**
      * Remove the specified resource from storage.
      *

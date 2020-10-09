@@ -14,6 +14,23 @@ class DepartmentController extends Controller
         $this->middleware('checkauth')->except('index','show');
     }
     /**
+     * @OA\GET(
+     *      path="/api/v1/departments",
+     *      operationId="getDepartments",
+     *      tags={"Departments"},
+     *      summary="Get departments information",
+     *      description="Returns list of departments",
+     *      @OA\Response(
+     *         response=201,
+     *         description="Successful operation",
+     *         description="Success",
+     *         @OA\MediaType(
+     *             mediaType="application/json",
+     *         )
+     *      )
+     *  )
+     */
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -29,7 +46,7 @@ class DepartmentController extends Controller
 
         /**
      * @OA\POST(
-     ** path="/api/department",
+     ** path="/api/v1/departments",
      *   tags={"Department"},
      *   summary="Store new department",
      *   operationId="storeDepartment",
@@ -74,11 +91,6 @@ class DepartmentController extends Controller
      * )
      */
     /**
-     * me api
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -95,9 +107,9 @@ class DepartmentController extends Controller
 
     /**
      * @OA\GET(
-     *      path="/departments/{id}",
+     *      path="/api/v1/departments/{id}",
      *      operationId="getDepartmentById",
-     *      tags={"Departments"},
+     *      tags={"Department"},
      *      summary="Get department information",
      *      description="Returns department data",
      *      @OA\Parameter(
@@ -109,25 +121,8 @@ class DepartmentController extends Controller
      *              type="integer"
      *          )
      *      ),
-     *      @OA\Parameter(
-     *          name="name",
-     *          in="query",
-     *          required=true,
-     *       @OA\Schema(
-     *            type="string"
-     *        )
-     *       ),
-     *       @OA\Parameter(
-     *         name="description",
-     *         in="query",
-     *         required=true,
-    *         @OA\Schema(
-    *               type="string"
-    *          )
-    *         ),
      *      @OA\Response(
      *         response=200,
-     *         description="Successful operation",
      *         description="Success",
      *         @OA\MediaType(
      *             mediaType="application/json",
@@ -149,13 +144,13 @@ class DepartmentController extends Controller
     }
 
     /**
-     * @OA\Put(
-     *      path="/departments/{id}",
-     *      operationId="updateDepartment",
-     *      tags={"Departments"},
-     *      summary="Update existing department",
-     *      description="Returns updated department data",
-     *      @OA\Parameter(
+     * @OA\PUT(
+     ** path="/api/v1/departments/{id}",
+     *   tags={"Department"},
+     *   summary="Update existing department",
+     *   operationId="updateDepartment",
+     *   security={{"bearerAuth":{}}},
+     *  @OA\Parameter(
      *          name="id",
      *          description="Department id",
      *          required=true,
@@ -163,21 +158,8 @@ class DepartmentController extends Controller
      *          @OA\Schema(
      *              type="integer"
      *          )
-     *      ),
-     *      @OA\Response(
-     *          response=401,
-     *          description="Unauthenticated",
-     *      )
-     * )
-     */
-        /**
-     * @OA\PUT(
-     ** path="/api/departments/{id}",
-     *   tags={"Department"},
-     *   summary="Store new department",
-     *   operationId="storeDepartment",
-     *   security={{"bearerAuth":{}}},
-     *   @OA\Parameter(
+     *   ),
+     *  @OA\Parameter(
      *      name="name",
      *      in="query",
      *      required=true,
@@ -194,7 +176,7 @@ class DepartmentController extends Controller
      *      )
      *   ),
      *  @OA\Response(
-     *      response=201,
+     *      response=200,
      *       description="Success",
      *      @OA\MediaType(
      *           mediaType="application/json",
@@ -232,6 +214,39 @@ class DepartmentController extends Controller
         ],200);
     }
 
+
+    /**
+     * @OA\DELETE(
+     **  path="/api/v1/departments/{id}",
+     *   tags={"Department"},
+     *   summary="Delete an existing department",
+     *   operationId="deleteDepartment",
+     *   security={{"bearerAuth":{}}},
+     *  @OA\Parameter(
+     *          name="id",
+     *          description="Department id",
+     *          required=true,
+     *          in="path",
+     *          @OA\Schema(
+     *              type="integer"
+     *          )
+     *   ),
+     *  @OA\Response(
+     *      response=204,
+     *       description="No content",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *   ),
+     *   @OA\Response(
+     *      response=401,
+     *       description="El token de autenticación expiró | Token de autenticacion invalido",
+     *      @OA\MediaType(
+     *           mediaType="application/json",
+     *      )
+     *    )
+     * )
+     */
     /**
      * Remove the specified resource from storage.
      *
