@@ -278,11 +278,11 @@ class AuthController extends Controller
     *     ),
     *     @OA\Response(
     *         response="401",
-    *         description="Invalid verification token"
+    *         description="Invalid verification token",
     *         @OA\MediaType(
     *           mediaType="application/json",
     *         )
-    *     )
+    *     ),
     * )
     */
     public function refreshToken(Request $request){

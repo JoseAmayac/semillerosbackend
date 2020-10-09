@@ -239,7 +239,7 @@ class ProgramController extends Controller
      *         @OA\MediaType(
      *             mediaType="application/json",
      *         )
-     *      )
+     *      ),
      *      @OA\Response(
      *         response="default",
      *         description="Operation error",
