@@ -39,7 +39,7 @@ class SeedlingController extends Controller
     public function index()
     {
         $seedlings = Seedling::all();
-        return response()->json(['seedlings', $seedlings], 200);
+        return response()->json(['seedlings' => $seedlings], 200);
     }
 
     /**
@@ -105,7 +105,7 @@ class SeedlingController extends Controller
     public function store(SeedlingRequest $request)
     {
         $seedling = Seedling::create($request->all());
-        return response()->json(['seedling', $seedling], 201);
+        return response()->json(['seedling'=> $seedling], 201);
     }
 
     /**
@@ -141,7 +141,7 @@ class SeedlingController extends Controller
      */
     public function show(Seedling $seedling)
     {
-        return response()->json(['seedling', $seedling], 200);
+        return response()->json(['seedling'=> $seedling], 200);
     }
 
     /**
@@ -217,7 +217,7 @@ class SeedlingController extends Controller
     public function update(SeedlingRequest $request, Seedling $seedling)
     {
         $seedling->update($request->all());
-        return response()->json(['seedling', $seedling], 201);
+        return response()->json(['seedling'=> $seedling], 201);
     }
 
     /**
@@ -261,6 +261,6 @@ class SeedlingController extends Controller
     public function destroy(Seedling $seedling)
     {
         $seedling->delete();
-        return response()->json(['message', 'Semillero eliminado correctamente'], 204);
+        return response()->json(['message'=> 'Semillero eliminado correctamente'], 204);
     }
 }

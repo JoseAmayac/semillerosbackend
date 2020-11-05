@@ -39,7 +39,7 @@ class ProgramController extends Controller
     public function index()
     {
         $programs = Program::all();
-        return response()->json(['programs', $programs], 200);
+        return response()->json(['programs' => $programs], 200);
     }
 
     /**
@@ -146,7 +146,7 @@ class ProgramController extends Controller
      */
     public function show(Program $program)
     {
-        return response()->json(['program', $program], 200);
+        return response()->json(['program'=> $program], 200);
     }
 
     /**
@@ -214,7 +214,7 @@ class ProgramController extends Controller
     public function update(ProgramRequest $request, Program $program)
     {
         $program->update($request->all());
-        return response()->json(['program', $program], 201);
+        return response()->json(['program'=> $program], 201);
     }
 
     /**
@@ -258,6 +258,6 @@ class ProgramController extends Controller
     public function destroy(Program $program)
     {
         $program->delete();
-        return response()->json(['message', 'Programa eliminado correctamente'], 204);
+        return response()->json(['message'=> 'Programa eliminado correctamente'], 204);
     }
 }
