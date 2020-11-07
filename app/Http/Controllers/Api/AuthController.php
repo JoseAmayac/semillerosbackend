@@ -260,6 +260,8 @@ class AuthController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function me(){
+        $user = Auth::user();
+        $user->roles;
         return response()->json([
             'user' => Auth::user()
         ],200);
