@@ -140,7 +140,11 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        return response()->json(['group', $group], 200);
+        $group -> seedlings;
+        $group -> lines;
+        return response()->json([
+            'group' => $group
+        ],200);
     }
 
 

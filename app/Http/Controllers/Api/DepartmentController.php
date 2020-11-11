@@ -138,6 +138,8 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
+        $department -> programs;
+        $department -> groups;
         return response()->json([
             'department' => $department
         ],200);
