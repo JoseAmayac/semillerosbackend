@@ -142,11 +142,9 @@ class SeedlingController extends Controller
      */
     public function show(Seedling $seedling)
     {
-        DB::enableQueryLog();
         $seedling -> users ->load(['program' => function($query){
             $query->select(['name', 'id'])->get();
         }]);
-        dd(DB::getQueryLog());
         return response()->json(['seedling'=> $seedling], 200);
     }
 
