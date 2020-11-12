@@ -333,6 +333,8 @@ class UserController extends Controller
             $query->where('id','=',2)->orWhere('id','=',3);
         })->get();
 
-        return response()->json($teachers);
+        return response()->json([
+            'teachers' => $teachers
+        ],200);
     }
 }
