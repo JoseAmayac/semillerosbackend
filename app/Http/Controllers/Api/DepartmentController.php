@@ -41,7 +41,7 @@ class DepartmentController extends Controller
 
         return response()->json([
             'departments' => $departments
-        ], 201);
+        ], 200);
     }
 
     /**
