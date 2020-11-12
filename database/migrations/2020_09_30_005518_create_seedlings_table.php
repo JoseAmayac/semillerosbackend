@@ -16,7 +16,7 @@ class CreateSeedlingsTable extends Migration
         Schema::create('seedlings', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("description");
+            $table->text("description");
             $table->unsignedBigInteger('group_id');
             $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();

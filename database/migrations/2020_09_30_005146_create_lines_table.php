@@ -16,7 +16,7 @@ class CreateLinesTable extends Migration
         Schema::create('lines', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("description")->nullable();
+            $table->text("description")->nullable();
             $table->unsignedBigInteger('group_id');
             $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();

@@ -141,6 +141,7 @@ class SeedlingController extends Controller
      */
     public function show(Seedling $seedling)
     {
+        $seedling -> users;
         return response()->json(['seedling'=> $seedling], 200);
     }
 
