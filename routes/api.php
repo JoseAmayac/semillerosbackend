@@ -34,6 +34,9 @@ Route::group([
     'middleware' => 'api'
 ],function(){
     Route::apiResource('users','App\Http\Controllers\Api\UserController');
+
+    Route::get('teachers','App\Http\Controllers\Api\UserController@getTeachers');
+
     Route::apiResource('departments','App\Http\Controllers\Api\DepartmentController');
     Route::apiResource('groups','App\Http\Controllers\Api\GroupController');
     Route::apiResource('lines','App\Http\Controllers\Api\LineController');

@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkauth');
+        // $this->middleware('checkauth');
     }
 
     /**
@@ -325,5 +325,14 @@ class UserController extends Controller
         return response()->json([
             'message' => 'Usuario eliminado correctamente'
         ],204);
+    }
+
+    public function getTeachers()
+    {
+        $teachers = User::whereHas('roles',function($query){
+            $query->where('id','=',2)->orWhere('id','=',3);
+        })->get();
+
+        return response()->json($teachers);
     }
 }
