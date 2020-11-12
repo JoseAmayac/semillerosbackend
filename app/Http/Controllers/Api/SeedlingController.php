@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Seedling;
 use App\Http\Requests\SeedlingRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SeedlingController extends Controller
 {
@@ -141,7 +142,9 @@ class SeedlingController extends Controller
      */
     public function show(Seedling $seedling)
     {
-        $seedling -> users;
+        $seedling -> users ->load(['program' => function($query){
+            $query->select(['name', 'id'])->get();
+        }]);
         return response()->json(['seedling'=> $seedling], 200);
     }
 
