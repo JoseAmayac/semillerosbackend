@@ -64,6 +64,6 @@ class User extends Authenticatable
     }
 
     public function seedlings(){
-        return $this->belongsToMany(Seedling::class);
+        return $this->belongsToMany(Seedling::class)->withPivot('status');
     }
 }
