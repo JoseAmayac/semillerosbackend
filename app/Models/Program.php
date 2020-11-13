@@ -12,7 +12,8 @@ class Program extends Model
     protected $fillable = [
         'name',
         'description',
-        'department_id'
+        'department_id',
+        'coordinator_id'
     ];
 
     public function department(){

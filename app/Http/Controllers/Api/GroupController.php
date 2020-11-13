@@ -104,7 +104,10 @@ class GroupController extends Controller
     public function store(GroupRequest $request)
     {
         $group = Group::create($request->all());
-        return response()->json(['group'=>$group], 201);
+        return response()->json([
+            'group'=>$group,
+            'message' => 'Grupo de investigación agregado correctamente'
+        ], 201);
     }
 
     /**
