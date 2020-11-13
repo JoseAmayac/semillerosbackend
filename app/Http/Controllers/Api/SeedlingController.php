@@ -142,10 +142,31 @@ class SeedlingController extends Controller
      */
     public function show(Seedling $seedling)
     {
-        $seedling -> users ->load(['program' => function($query){
-            $query->select(['name', 'id'])->get();
+        $teachers =[];
+        $students =[];
+        $users =[];
+        $users = $seedling -> users -> load(['roles'=>function($query){
+            $query->select(['id', 'name'])->get();
+        }, 'program'=>function($query){
+            $query->select(['id', 'name'])->get();
         }]);
-        return response()->json(['seedling'=> $seedling], 200);
+        $i = 0;
+        $j = 0;
+        foreach ($users as $user) {
+            $rol = $user->roles[0];
+            if ($rol->id == 4) {
+                $students[$i] = $user;
+                $i++;
+            }else{
+                $teachers[$j] = $user;
+                $j++;
+            }
+        }
+        return response()->json([
+            'seedling' => $seedling,
+            'teachers' => $teachers,
+            'students' => $students
+        ], 200);
     }
 
     /**
