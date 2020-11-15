@@ -225,6 +225,7 @@ class AuthController extends Controller
         $result = json_decode((string) $response->getBody(), true);
         $user = Auth::user();
         $user->roles;
+        $user-> seedlings;
         return response()->json([
             'authaccess'=>$result,
             'user' => $user
@@ -262,6 +263,7 @@ class AuthController extends Controller
     public function me(){
         $user = Auth::user();
         $user->roles;
+        $user-> seedlings;
         return response()->json([
             'user' => Auth::user()
         ],200);
