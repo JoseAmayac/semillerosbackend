@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkauth');
+        $this->middleware('checkauth')->except('show');
     }
 
     /**
