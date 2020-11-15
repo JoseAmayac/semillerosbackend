@@ -12,7 +12,8 @@ class Seedling extends Model
     protected $fillable = [
         'name',
         'description',
-        'group_id'
+        'group_id',
+        'teacher_id'
     ];
 
     protected $hidden = ['users'];

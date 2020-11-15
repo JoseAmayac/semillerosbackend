@@ -106,7 +106,10 @@ class SeedlingController extends Controller
     public function store(SeedlingRequest $request)
     {
         $seedling = Seedling::create($request->all());
-        return response()->json(['seedling'=> $seedling], 201);
+        return response()->json([
+            'seedling'=> $seedling,
+            'message' => 'Semillero agregado correctamente'
+        ], 201);
     }
 
     /**

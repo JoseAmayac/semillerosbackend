@@ -18,7 +18,9 @@ class CreateSeedlingsTable extends Migration
             $table->string("name");
             $table->text("description");
             $table->unsignedBigInteger('group_id');
+            $table->unsignedBigInteger('teacher_id');
             $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('teacher_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
