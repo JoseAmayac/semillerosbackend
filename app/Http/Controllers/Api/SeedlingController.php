@@ -106,6 +106,8 @@ class SeedlingController extends Controller
     public function store(SeedlingRequest $request)
     {
         $seedling = Seedling::create($request->all());
+        $seedling->users()->attach($request->get('teacher_id'));
+        $seedling->save();
         return response()->json([
             'seedling'=> $seedling,
             'message' => 'Semillero agregado correctamente'

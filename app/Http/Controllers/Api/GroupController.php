@@ -216,7 +216,10 @@ class GroupController extends Controller
     public function update(GroupRequest $request, Group $group)
     {
         $group->update($request->all());
-        return response()->json(['group'=>$group], 201);
+        return response()->json([
+            'group'=>$group,
+            'message' => 'Grupo de investigación actualizada correctamente'
+        ], 201);
     }
 
     /**

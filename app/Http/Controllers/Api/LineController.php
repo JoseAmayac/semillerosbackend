@@ -112,7 +112,8 @@ class LineController extends Controller
         $line = Line::create($request->all());
 
         return response()->json([
-            'line' => $line
+            'line' => $line,
+            'message' => 'Linea de investigación agregada correctamente'
         ],201);
     }
 
