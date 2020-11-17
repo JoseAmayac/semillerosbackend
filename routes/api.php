@@ -43,4 +43,6 @@ Route::group([
     Route::apiResource('programs','App\Http\Controllers\Api\ProgramController');
     Route::apiResource('publications','App\Http\Controllers\Api\PublicationController');
     Route::apiResource('seedlings','App\Http\Controllers\Api\SeedlingController');
+
+    Route::get('roles','App\Http\Controllers\Api\RoleController@index');
 });

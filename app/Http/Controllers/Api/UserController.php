@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -130,12 +132,18 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SignUpRequest $request)
+    public function store(UserRequest $request)
     {
         $user = User::create($request->all());
 
+        $role = Role::findById((int)$request->get('role_id'),'web');
+
+        $user->assignRole($role);
+        $user->save();
+
         return response()->json([
-            'user' => $user
+            'user' => $user,
+            'message' => 'Usuario agregado correctamente'
         ],201);
     }
 
@@ -335,6 +343,8 @@ class UserController extends Controller
             $query->where('id','=',2)->orWhere('id','=',3);
         })->with('department')->get();
 
-        return response()->json($teachers);
+        return response()->json([
+            'teachers' => $teachers
+        ],200);
     }
 }

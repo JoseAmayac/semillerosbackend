@@ -26,7 +26,8 @@ class ProgramRequest extends FormRequest
         return [
             'name' => 'required|string|unique:programs,name',
             'description' => 'string',
-            'department_id' => 'required|exists:departments,id'
+            'department_id' => 'required|exists:departments,id',
+            'coordinator_id' => 'required|exists:users,id'
         ];
     }
 
@@ -38,7 +39,9 @@ class ProgramRequest extends FormRequest
             'name.unique' => 'Ya existe un programa académico con este nombre',
             'description.string' => 'El formato de la descripción no es válido',
             'department_id.required' => 'El departamento es obligatorio',
-            'department_id.exists' => 'El departamento seleccionado no existe'
+            'department_id.exists' => 'El departamento seleccionado no existe',
+            'coordinator_id.required' => 'El coordinador de programa es obligatorio',
+            'coordinator_id.exists' => 'El coordinador seleccionado no existe'
         ];
     }
 }

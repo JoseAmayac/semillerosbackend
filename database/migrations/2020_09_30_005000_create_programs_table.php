@@ -19,8 +19,8 @@ class CreateProgramsTable extends Migration
             $table->text("description");
             $table->unsignedBigInteger('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
-            $table->unsignedBigInteger('coordinador_id')->nullable();
-            $table->foreign('coordinador_id')->references('id')->on('users');
+            $table->unsignedBigInteger('coordinator_id')->nullable();
+            $table->foreign('coordinator_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
