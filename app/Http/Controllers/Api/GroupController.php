@@ -142,6 +142,7 @@ class GroupController extends Controller
     {
         $group -> seedlings;
         $group -> lines;
+        $group -> publications;
         return response()->json([
             'group' => $group
         ],200);

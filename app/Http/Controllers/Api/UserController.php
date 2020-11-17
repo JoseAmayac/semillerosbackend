@@ -12,7 +12,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkauth')->except('show');
+        $this->middleware('checkauth')->except(['show', 'getTeachers']);
     }
 
     /**
@@ -173,6 +173,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         $user -> program;
+        $user -> department;
         return response()->json([
             'user' => $user
         ],200);
@@ -274,7 +275,7 @@ class UserController extends Controller
      */
     public function update(SignUpRequest $request, User $user)
     {
-        $user = tap($user)->update($request->all());
+        $user = $user->update($request->all());
 
         return response()->json([
             'user' => $user
@@ -332,7 +333,7 @@ class UserController extends Controller
     {
         $teachers = User::whereHas('roles',function($query){
             $query->where('id','=',2)->orWhere('id','=',3);
-        })->get();
+        })->with('department')->get();
 
         return response()->json($teachers);
     }
