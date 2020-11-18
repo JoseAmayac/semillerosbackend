@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Seedling;
 use App\Http\Requests\SeedlingRequest;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class SeedlingController extends Controller
 {
@@ -150,9 +148,9 @@ class SeedlingController extends Controller
         $teachers =[];
         $students =[];
         $users =[];
-        $users = $seedling -> users -> load(['roles'=>function($query){
+        $users = $seedling -> users -> load(['program'=>function($query){
             $query->select(['id', 'name'])->get();
-        }, 'program'=>function($query){
+        },'department'=>function($query){
             $query->select(['id', 'name'])->get();
         }]);
         $i = 0;
@@ -160,8 +158,11 @@ class SeedlingController extends Controller
         foreach ($users as $user) {
             $rol = $user->roles[0];
             if ($rol->id == 4) {
-                $students[$i] = $user;
-                $i++;
+                $status = $user -> pivot -> status;
+                if ($status != 0) {
+                    $students[$i] = $user;
+                    $i++;
+                }
             }else{
                 $teachers[$j] = $user;
                 $j++;

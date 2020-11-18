@@ -23,6 +23,6 @@ class Seedling extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class)->select(['program_id', 'name', 'email', 'lastname', 'users.id']);
+        return $this->belongsToMany(User::class)->select(['program_id', 'name', 'email', 'lastname', 'users.id', 'department_id'])->withPivot('status');
     }
 }
