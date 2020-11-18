@@ -15,13 +15,13 @@ class UsersRelationships extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->unsignedBigInteger('department_id')->nullable();
-            $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('set null')->onUpdate('cascade');;
             $table->unsignedBigInteger('program_id')->nullable();
-            $table->foreign('program_id')->references('id')->on('programs');
+            $table->foreign('program_id')->references('id')->on('programs')->onDelete('set null')->onUpdate('cascade');;
             $table->unsignedBigInteger('group_id')->nullable();
-            $table->foreign('group_id')->references('id')->on('groups');
+            $table->foreign('group_id')->references('id')->on('groups')->onDelete('set null')->onUpdate('cascade');;
             $table->unsignedBigInteger('seedling_id')->nullable();
-            $table->foreign('seedling_id')->references('id')->on('seedlings');
+            $table->foreign('seedling_id')->references('id')->on('seedlings')->onDelete('set null')->onUpdate('cascade');;
         });
     }
 

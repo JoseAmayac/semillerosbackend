@@ -150,7 +150,7 @@ class SeedlingController extends Controller
         $teachers =[];
         $students =[];
         $users =[];
-        $users = $seedling -> users -> load(['roles'=>function($query){
+        $users = $seedling ->users ->load(['roles'=>function($query){
             $query->select(['id', 'name'])->get();
         }, 'program'=>function($query){
             $query->select(['id', 'name'])->get();

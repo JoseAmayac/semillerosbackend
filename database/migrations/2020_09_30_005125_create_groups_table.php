@@ -18,7 +18,7 @@ class CreateGroupsTable extends Migration
             $table->string("name");
             $table->text("description");
             $table->unsignedBigInteger('department_id');
-            $table->foreign('department_id')->references('id')->on('departments');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade')->onUpdate('cascade');;
             $table->timestamps();
         });
     }
