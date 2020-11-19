@@ -134,7 +134,9 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = User::create($request->all());
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password);
+        $user = User::create($data);
 
         $role = Role::findById((int)$request->get('role_id'),'web');
 
