@@ -25,7 +25,7 @@ class PasswordRequest extends FormRequest
     { 
         return [
             'password' => 'required',
-            'new_password' => 'required|confirmed',
+            'new_password' => 'required|confirmed|min:8',
         ];
     }
 
@@ -33,7 +33,8 @@ class PasswordRequest extends FormRequest
     {
         return [
             'password.required' => 'La contraseña actual es obligatoria.',
-            'new_password.required' => 'La nueva contraseña es obligatoria'
+            'new_password.required' => 'La nueva contraseña es obligatoria',
+            'new_password.min' => 'La nueva contraseña debe contener al menos 8 caracteres' 
         ];
     }
 }

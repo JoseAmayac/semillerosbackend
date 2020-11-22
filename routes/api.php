@@ -38,7 +38,7 @@ Route::group([
     Route::get('teachers','App\Http\Controllers\Api\UserController@getTeachers');
     Route::post('seedlingUser', 'App\Http\Controllers\Api\SeedlingUserController@createSeedlingUser');
     Route::put('changeStatus/{id}', 'App\Http\Controllers\Api\SeedlingUserController@setStatus');
-    Route::put('resetPassword/{id}', 'App\Http\Controllers\Api\UserController@resetPassword');
+    Route::put('resetPassword', 'App\Http\Controllers\Api\UserController@resetPassword');
 
     Route::apiResource('departments','App\Http\Controllers\Api\DepartmentController');
     Route::apiResource('groups','App\Http\Controllers\Api\GroupController');

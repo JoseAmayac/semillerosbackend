@@ -8,6 +8,8 @@ use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -353,10 +355,16 @@ class UserController extends Controller
     }
 
     public function resetPassword(PasswordRequest $request) {
+        $user = User::find(Auth::id());
         $password = bcrypt($request->new_password);
-        $user =  User::find($request->user_id);
+        $current_password = $request->password;
+        if (!Hash::check($current_password, $user->password)) {
+            return response()->json([
+                'message' => 'La contraseña actual no es correcta'
+            ], 401);
+        }
         $user -> password = $password;
-        $user -> save();
+        $user->save();
         return response()->json([
             'user' => $user,
             'message' => 'Contraseña Actualizada con éxito'
