@@ -248,7 +248,10 @@ class SeedlingController extends Controller
     public function update(SeedlingRequest $request, Seedling $seedling)
     {
         $seedling->update($request->all());
-        return response()->json(['seedling'=> $seedling], 201);
+        return response()->json([
+            'seedling'=> $seedling,
+            'message' => 'Información de semillero actualizada correctamente'
+        ], 201);
     }
 
     /**
@@ -292,6 +295,6 @@ class SeedlingController extends Controller
     public function destroy(Seedling $seedling)
     {
         $seedling->delete();
-        return response()->json(['message'=> 'Semillero eliminado correctamente'], 204);
+        return response()->json(['message'=> 'Semillero eliminado correctamente'], 200);
     }
 }
