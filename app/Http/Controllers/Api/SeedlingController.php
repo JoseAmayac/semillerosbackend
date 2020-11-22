@@ -13,6 +13,12 @@ class SeedlingController extends Controller
         $this->middleware("checkauth")->only("store", "update", "delete");
     }
 
+    public function getLatest(){
+        $seedlings = Seedling::latest()->take(6)->get();
+
+        return response()->json(['seedlings'=>$seedlings], 200);
+    }
+
     /**
      * @OA\GET(
      *      path="/api/v1/seedlings",

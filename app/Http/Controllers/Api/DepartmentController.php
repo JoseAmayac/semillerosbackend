@@ -212,7 +212,8 @@ class DepartmentController extends Controller
         $department->update($request->all());
 
         return response()->json([
-            'department' => $department
+            'department' => $department,
+            'message' => 'Departamento académico actualizado correctamente'
         ],200);
     }
 
@@ -261,6 +262,6 @@ class DepartmentController extends Controller
 
         return response()->json([
             'message' => "Departamento eliminado correctamente"
-        ],204);
+        ],200);
     }
 }

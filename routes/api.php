@@ -40,10 +40,14 @@ Route::group([
     Route::put('changeStatus/{id}', 'App\Http\Controllers\Api\SeedlingUserController@setStatus');
 
     Route::apiResource('departments','App\Http\Controllers\Api\DepartmentController');
+
+    Route::get('groups/latest','App\Http\Controllers\Api\GroupController@getLatest');
     Route::apiResource('groups','App\Http\Controllers\Api\GroupController');
     Route::apiResource('lines','App\Http\Controllers\Api\LineController');
     Route::apiResource('programs','App\Http\Controllers\Api\ProgramController');
     Route::apiResource('publications','App\Http\Controllers\Api\PublicationController');
+
+    Route::get('seedlings/latest','App\Http\Controllers\Api\SeedlingController@getLatest');
     Route::apiResource('seedlings','App\Http\Controllers\Api\SeedlingController');
 
     Route::get('roles','App\Http\Controllers\Api\RoleController@index');

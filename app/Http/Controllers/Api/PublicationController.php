@@ -38,7 +38,7 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        $publications = Publication::all();
+        $publications = Publication::paginate(10);
 
         return response()->json([
             'publications' => $publications
@@ -118,7 +118,8 @@ class PublicationController extends Controller
         $publication = Publication::create($request->all());
 
         return response()->json([
-            'publication' => $publication
+            'publication' => $publication,
+            'message' => 'Publicación creada correctamente'
         ],201);
     }
 
@@ -243,7 +244,8 @@ class PublicationController extends Controller
         $publication->update($request->all());
 
         return response()->json([
-            'publication' => $publication
+            'publication' => $publication,
+            'message' => 'Información de publicación actualizada correctamente'
         ],200);
     }
 

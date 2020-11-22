@@ -24,7 +24,7 @@ class SeedlingRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|string|unique:departments,name',
+            'name'=>'required|string|unique:seedlings,name,'.$this->id,
             'description'=>'string',
             'group_id'=>'required|exists:groups,id'
         ];
