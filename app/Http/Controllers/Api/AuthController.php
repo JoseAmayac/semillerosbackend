@@ -264,6 +264,8 @@ class AuthController extends Controller
         $user = Auth::user();
         $user->roles;
         $user-> seedlings;
+        $user-> program;
+        $user-> department;
         return response()->json([
             'user' => Auth::user()
         ],200);

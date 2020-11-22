@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
@@ -281,12 +282,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(SignUpRequest $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $user = $user->update($request->all());
+        $userUpdated = tap($user)->update($request->all());
 
         return response()->json([
-            'user' => $user
+            'user' => $userUpdated,
+            'message' => 'Usuario Actualizado con éxito'
         ],200);
     }
 
@@ -345,6 +347,17 @@ class UserController extends Controller
 
         return response()->json([
             'teachers' => $teachers
+        ],200);
+    }
+
+    public function resetPassword(PasswordRequest $request) {
+        $password = bcrypt($request->new_password);
+        $user =  User::find($request->user_id);
+        $user -> password = $password;
+        $user -> save();
+        return response()->json([
+            'user' => $user,
+            'message' => 'Contraseña Actualizada con éxito'
         ],200);
     }
 }
