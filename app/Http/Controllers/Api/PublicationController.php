@@ -156,6 +156,8 @@ class PublicationController extends Controller
      */
     public function show(Publication $publication)
     {
+        $publication->group;
+        $publication->user;
         return response()->json([
             'publication' => $publication
         ],200);

@@ -263,10 +263,10 @@ class AuthController extends Controller
     public function me(){
         $user = Auth::user();
         $user->roles;
-        $user->seedlings;
+        $user->seedlings->load('group');
         $user->groups;
         return response()->json([
-            'user' => Auth::user()
+            'user' => $user
         ],200);
     }
 
