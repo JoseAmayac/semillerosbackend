@@ -65,4 +65,8 @@ class User extends Authenticatable
     public function seedlings(){
         return $this->belongsToMany(Seedling::class)->withPivot('status');
     }
+
+    public function assignedSeedlings() {
+        return $this->hasMany(Seedling::class, 'teacher_id');
+    }
 }

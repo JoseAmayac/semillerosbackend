@@ -24,7 +24,7 @@ class GroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|string|unique:departments,name',
+            'name'=>'required|string|unique:groups,name,'.$this->id,
             'description'=>'string',
             'department_id'=> 'required|exists:departments,id'
         ];

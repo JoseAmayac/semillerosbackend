@@ -24,7 +24,7 @@ class ProgramRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|unique:programs,name',
+            'name' => 'required|string|unique:programs,name,'.$this->id,
             'description' => 'string',
             'department_id' => 'required|exists:departments,id',
             'coordinator_id' => 'required|exists:users,id'

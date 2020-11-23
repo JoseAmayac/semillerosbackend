@@ -16,13 +16,15 @@ class Seedling extends Model
         'teacher_id'
     ];
 
-    protected $hidden = ['users'];
-
     public function group(){
         return $this->belongsTo(Group::class);
     }
 
     public function users(){
-        return $this->belongsToMany(User::class)->select(['program_id', 'name', 'email', 'lastname', 'users.id', 'department_id'])->withPivot('status');
+        return $this->belongsToMany(User::class)->select(['program_id', 'name', 'email', 'lastname', 'users.id', 'department_id'])->withPivot('status', 'id');
+    }
+
+    public function teacher() {
+        return $this->belongsTo(User::class, 'teacher_id');
     }
 }

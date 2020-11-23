@@ -354,7 +354,7 @@ class UserController extends Controller
         ],200);
     }
 
-    public function resetPassword(PasswordRequest $request) {
+    public function updatePassword(PasswordRequest $request) {
         $user = User::find(Auth::id());
         $password = bcrypt($request->new_password);
         $current_password = $request->password;
