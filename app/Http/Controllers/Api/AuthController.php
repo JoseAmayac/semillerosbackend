@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\SignUpRequest;
+use Facade\Ignition\QueryRecorder\Query;
 use Laravel\Passport\Client as OClient; 
 use Illuminate\Support\Facades\Http;
 use GuzzleHttp\Client;
@@ -225,7 +226,15 @@ class AuthController extends Controller
         $result = json_decode((string) $response->getBody(), true);
         $user = Auth::user();
         $user->roles;
-        $user-> seedlings;
+        $user-> program;
+        $user-> department;
+        $user->seedlings->load('group');
+        if ($user->hasRole(['Semilleros general', 'Semilleros especifico'])) {
+            $user->assignedSeedlings->load(['users' => function($query){
+                $query->where('status', '=', 0)->with('program')->get();
+            }]);
+        }
+        $user->groups;
         return response()->json([
             'authaccess'=>$result,
             'user' => $user
@@ -264,6 +273,13 @@ class AuthController extends Controller
         $user = Auth::user();
         $user->roles;
         $user->seedlings->load('group');
+        $user->program;
+        $user->department;
+        if ($user->hasRole(['Semilleros general', 'Semilleros especifico'])) {
+            $user->assignedSeedlings->load(['users' => function($query){
+                $query->where('status', '=', 0)->with('program')->get();
+            }]);
+        }
         $user->groups;
         return response()->json([
             'user' => $user

@@ -37,14 +37,20 @@ class SeedlingUserController extends Controller
             'status' => 'required|integer',
             'seedling_user' => 'required|exists:seedling_user,id'
         ]);
-        $seedling_user = DB::table('seedling_user')->where('id', '=', $request -> get('seedling_id')) -> first();
+        $seedling_user = DB::table('seedling_user')->find($request->get('seedling_user'));
         if ($seedling_user) {
             $seedling_user -> status = $request -> get('status');
-            $seedling_user -> save();
+            DB::table('seedling_user')
+              ->where('id', $seedling_user->id)
+              ->update(['status' => $request->status]);
+            return response() ->json([
+                'message' => 'Usuario inscrito al semillero con éxito',
+                'seedling_user' => $seedling_user
+            ], 200);
         }else{
             return response()->json([
-                'message' => 'Ya se encuentra inscrito en este semillero',
-                'error' => 'registerExists'
+                'message' => 'Solicitud no encontrada',
+                'error' => 'notFound'
             ], 422);
         }
     }

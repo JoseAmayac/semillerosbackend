@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PasswordRequest;
 use App\Http\Requests\SignUpRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -283,12 +286,13 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(SignUpRequest $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
-        $user = $user->update($request->all());
+        $userUpdated = tap($user)->update($request->all());
 
         return response()->json([
-            'user' => $user
+            'user' => $userUpdated,
+            'message' => 'Usuario Actualizado con éxito'
         ],200);
     }
 
@@ -336,7 +340,7 @@ class UserController extends Controller
 
         return response()->json([
             'message' => 'Usuario eliminado correctamente'
-        ],204);
+        ],200);
     }
 
     public function getTeachers()
@@ -347,6 +351,23 @@ class UserController extends Controller
 
         return response()->json([
             'teachers' => $teachers
+        ],200);
+    }
+
+    public function updatePassword(PasswordRequest $request) {
+        $user = User::find(Auth::id());
+        $password = bcrypt($request->new_password);
+        $current_password = $request->password;
+        if (!Hash::check($current_password, $user->password)) {
+            return response()->json([
+                'message' => 'La contraseña actual no es correcta'
+            ], 401);
+        }
+        $user -> password = $password;
+        $user->save();
+        return response()->json([
+            'user' => $user,
+            'message' => 'Contraseña Actualizada con éxito'
         ],200);
     }
 }
