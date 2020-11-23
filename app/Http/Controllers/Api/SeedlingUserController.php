@@ -54,4 +54,16 @@ class SeedlingUserController extends Controller
             ], 422);
         }
     }
+
+    public function deleteSeedlingUser(Request $request) {
+        $request -> validate([
+            'seedling_user' => 'required|exists:seedling_user,id'
+        ]);
+        $seedling_user = DB::table('seedling_user')->find($request->get('seedling_user'));
+        DB::table('seedling_user')->where('id', $seedling_user->id)->delete();
+        return response()->json([
+            'message' => 'Usuario Eliminado con Éxito',
+            'eliminado' => $seedling_user
+        ]);
+    }
 }
