@@ -38,7 +38,7 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        $publications = Publication::paginate(10);
+        $publications = Publication::orderBy('created_at','DESC')->paginate(6);
 
         return response()->json([
             'publications' => $publications
@@ -295,6 +295,6 @@ class PublicationController extends Controller
 
         return response()->json([
             'message' => 'Publicación eliminada correctamente'
-        ],204);
+        ],200);
     }
 }

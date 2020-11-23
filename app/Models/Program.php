@@ -25,6 +25,6 @@ class Program extends Model
     }
 
     public function coordinator(){
-        return $this->hasOne(User::class,'coordinator_id');
+        return $this->belongsTo(User::class,'coordinator_id');
     }
 }

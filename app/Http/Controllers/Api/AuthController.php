@@ -226,13 +226,13 @@ class AuthController extends Controller
         $result = json_decode((string) $response->getBody(), true);
         $user = Auth::user();
         $user->roles;
-        $user-> program;
-        $user-> department;
+        $user->program;
+        $user->department;
         $user->seedlings->load('group');
         if ($user->hasRole(['Semilleros general', 'Semilleros especifico'])) {
             $user->assignedSeedlings->load(['users' => function($query){
                 $query->where('status', '=', 0)->with('program')->get();
-            }]);
+            },'group']);
         }
         $user->groups;
         return response()->json([

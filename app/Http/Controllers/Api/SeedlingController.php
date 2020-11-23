@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Seedling;
 use App\Http\Requests\SeedlingRequest;
+use App\Models\Group;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class SeedlingController extends Controller
 {
@@ -110,8 +113,11 @@ class SeedlingController extends Controller
     public function store(SeedlingRequest $request)
     {
         $seedling = Seedling::create($request->all());
-        // $seedling->users()->attach($request->get('teacher_id'));
-        // $seedling->save();
+        $group = Group::find($request->group_id);
+        $groupuser = DB::table('group_user')->where('user_id',$request->teacher_id)->where('group_id',$request->group_id)->first();
+        if (!$groupuser) {
+            $group->teachers()->attach($request->get('teacher_id'));
+        }
         return response()->json([
             'seedling'=> $seedling,
             'message' => 'Semillero agregado correctamente'
@@ -151,7 +157,7 @@ class SeedlingController extends Controller
      */
     public function show(Seedling $seedling)
     {
-        $teachers =[];
+        $teacher = new User();
         $students =[];
         $users =[];
         $users = $seedling ->users-> load(['program'=>function($query){
@@ -160,23 +166,17 @@ class SeedlingController extends Controller
             $query->select(['id', 'name'])->get();
         }]);
         $i = 0;
-        $j = 0;
         foreach ($users as $user) {
-            $rol = $user->roles[0];
-            if ($rol->id == 4) {
-                $status = $user->pivot->status;
-                if ($status != 0) {
-                    $students[$i] = $user;
-                    $i++;
-                }
-            }else{
-                $teachers[$j] = $user;
-                $j++;
+            $status = $user->pivot->status;
+            if ($status != 0) {
+                $students[$i] = $user;
+                $i++;
             }
         }
+        $teacher = $seedling->teacher->load('department');
         return response()->json([
             'seedling' => $seedling,
-            'teachers' => $teachers,
+            'teacher' => $teacher,
             'students' => $students
         ], 200);
     }

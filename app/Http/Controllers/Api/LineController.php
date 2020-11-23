@@ -150,6 +150,7 @@ class LineController extends Controller
      */
     public function show(Line $line)
     {
+        $line->group;
         return response()->json([
             'line' => $line
         ],200);
@@ -222,7 +223,8 @@ class LineController extends Controller
         $line->update($request->all());
 
         return response()->json([
-            'line' => $line
+            'line' => $line,
+            'message' => 'Información de linea de investigación actualizada con éxito'
         ],200);
     }
 
@@ -270,6 +272,6 @@ class LineController extends Controller
 
         return response()->json([
             'message' => 'Linea de investigación eliminada correctamente'
-        ],204);
+        ],200);
     }
 }

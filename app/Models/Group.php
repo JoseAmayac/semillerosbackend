@@ -32,6 +32,6 @@ class Group extends Model
     }
 
     public function teachers(){
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class)->withTimestamps();
     }
 }
