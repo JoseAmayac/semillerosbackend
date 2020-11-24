@@ -27,20 +27,20 @@ class AuthControllerRegisterTest extends TestCase
     }
 
     /** @test */
-    public function register_without_programs(){
-        $response = $this->postJson('api/auth/signup',[
-            'name' => 'prueba',
-            'lastname' => 'primera',
-            'email' => 'admin@gmail.com',
-            'password' => '12345678',
-            'password_confirmation' => '12345678',
-            'cellphone' => '3202536253',
-            'program_id' => '1'
-        ]);
+    // public function register_without_programs(){
+    //     $response = $this->postJson('api/auth/signup',[
+    //         'name' => 'prueba',
+    //         'lastname' => 'primera',
+    //         'email' => 'admin@gmail.com',
+    //         'password' => '12345678',
+    //         'password_confirmation' => '12345678',
+    //         'cellphone' => '3202536253',
+    //         'program_id' => '1'
+    //     ]);
         
-        $this->assertDatabaseCount('programs',0);
-        $response->assertStatus(422);
-    }
+    //     $this->assertDatabaseCount('programs',0);
+    //     $response->assertStatus(422);
+    // }
 
     /** @test */
     public function register_with_email_that_exists(){
