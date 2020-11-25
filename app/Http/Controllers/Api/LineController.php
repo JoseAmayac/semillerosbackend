@@ -12,7 +12,7 @@ class LineController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkauth')->only('store','update','delete');
+        $this->middleware('checkauth')->only('store','update','destroy');
     }
 
 
@@ -115,7 +115,7 @@ class LineController extends Controller
             'line' => $line,
             'message' => 'Linea de investigación agregada correctamente'
         ],201);
-    }
+    } 
 
     /**
      * @OA\GET(

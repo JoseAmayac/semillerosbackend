@@ -6,14 +6,14 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class LineControllerIndexTest extends TestCase
+class PublicationControllerIndexTest extends TestCase
 {
     /** @test */
     public function testExample()
     {
-        $response = $this->getJson('/api/v1/lines');
+        $response = $this->getJson('/api/v1/publications');
 
         $response->assertStatus(200);
-        $response->assertJsonStructure(['lines']);
+        $response->assertJsonStructure(['publications']);
     }
 }

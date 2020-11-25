@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class PublicationController extends Controller
 {
 
-    public function __construct()
+    public function __construct() 
     {
         $this->middleware('checkauth')->except('index','show');
     }

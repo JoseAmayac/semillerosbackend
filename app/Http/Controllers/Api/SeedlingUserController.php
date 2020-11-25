@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class SeedlingUserController extends Controller
 {
+    public function __construct() 
+    {
+        $this->middleware('checkauth');
+    }
+
     public function createSeedlingUser(Request $request){
         $request -> validate([
             'user_id' => 'required|exists:users,id',
@@ -36,23 +41,18 @@ class SeedlingUserController extends Controller
         $request -> validate([
             'status' => 'required|integer',
             'seedling_user' => 'required|exists:seedling_user,id'
+        ], [
+            'seedling_user.exists' => 'Solicitud no encontrada'
         ]);
         $seedling_user = DB::table('seedling_user')->find($request->get('seedling_user'));
-        if ($seedling_user) {
-            $seedling_user -> status = $request -> get('status');
-            DB::table('seedling_user')
-              ->where('id', $seedling_user->id)
-              ->update(['status' => $request->status]);
-            return response() ->json([
-                'message' => 'Usuario inscrito al semillero con éxito',
-                'seedling_user' => $seedling_user
-            ], 200);
-        }else{
-            return response()->json([
-                'message' => 'Solicitud no encontrada',
-                'error' => 'notFound'
-            ], 422);
-        }
+        $seedling_user -> status = $request -> get('status');
+        DB::table('seedling_user')
+            ->where('id', $seedling_user->id)
+            ->update(['status' => $request->status]);
+        return response() ->json([
+            'message' => 'Usuario inscrito al semillero con éxito',
+            'seedling_user' => $seedling_user
+        ], 200);
     }
 
     public function deleteSeedlingUser(Request $request) {
@@ -62,8 +62,8 @@ class SeedlingUserController extends Controller
         $seedling_user = DB::table('seedling_user')->find($request->get('seedling_user'));
         DB::table('seedling_user')->where('id', $seedling_user->id)->delete();
         return response()->json([
-            'message' => 'Usuario Eliminado con Éxito',
+            'message' => 'Solicitud rechazada con éxito',
             'eliminado' => $seedling_user
         ]);
-    }
+    } 
 }

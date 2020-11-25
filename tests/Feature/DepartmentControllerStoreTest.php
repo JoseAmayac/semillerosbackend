@@ -21,4 +21,34 @@ class DepartmentControllerStoreTest extends TestCase
         $response->assertJsonStructure(['message','errors']);
         $response->assertJsonValidationErrors(['name']);
     }
+
+    /** @test */
+    public function store_return_correct_response_after_save()
+    {
+        $response = $this->withHeaders([
+            'Authorization' => $this->token
+        ])->postJson('/api/v1/departments',[
+            "name" => "Estudios sociales y empresariales 452",
+            "description" => "Departamento de Estudios sociales y empresariales de la UAM"
+        ]);
+
+        $response->assertStatus(201);
+        $response->assertJsonStructure(['department']);
+    }
+
+    /** @test */
+    public function store_without_token_in_headers_middleware_error()
+    {
+        $response = $this->postJson('/api/v1/departments',[
+            "name" => "Estudios sociales y empresariales",
+            "description" => "Departamento de Estudios sociales y empresariales de la UAM"
+        ]);
+
+        $response->assertStatus(401);
+        $response->assertJsonStructure(['message','code']);
+        $response->assertJson([
+            'message' => 'Token de autenticación invalido',
+            'code' => 'invalid_token'
+        ]);
+    }
 }

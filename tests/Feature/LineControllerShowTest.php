@@ -8,12 +8,8 @@ use Tests\TestCase;
 
 class LineControllerShowTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    /** @test */
+    public function line_id_not_exists()
     {
         $response = $this->getJson('/api/v1/lines/100');
 
@@ -23,7 +19,7 @@ class LineControllerShowTest extends TestCase
 
     /** @test */
     public function line_id_is_valid_correct_response(){
-        $response = $this->getJson('/api/v1/lines/1');
+        $response = $this->getJson('/api/v1/lines/2');
         $response->assertStatus(200);
         $response->assertJsonStructure(["line"]);
     }
