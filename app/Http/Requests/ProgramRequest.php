@@ -23,8 +23,12 @@ class ProgramRequest extends FormRequest
      */
     public function rules()
     {
+        $id = null;
+        if ($this->route('program')) {
+            $id = $this->route('program')->id;
+        }
         return [
-            'name' => 'required|string|unique:programs,name,'.$this->id,
+            'name' => 'required|string|unique:programs,name,'.$id,
             'description' => 'string',
             'department_id' => 'required|exists:departments,id',
             'coordinator_id' => 'required|exists:users,id'

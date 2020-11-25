@@ -13,7 +13,7 @@ class SeedlingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("checkauth")->only("store", "update", "delete");
+        $this->middleware("checkauth")->only("store", "update", "destroy");
     }
 
     public function getLatest(){
@@ -257,7 +257,7 @@ class SeedlingController extends Controller
         return response()->json([
             'seedling'=> $seedling,
             'message' => 'Información de semillero actualizada correctamente'
-        ], 201);
+        ], 200);
     }
 
     /**

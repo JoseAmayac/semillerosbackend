@@ -363,7 +363,7 @@ class UserController extends Controller
                 'message' => 'La contraseña actual no es correcta'
             ], 401);
         }
-        $user -> password = $password;
+        $user ->password = $password;
         $user->save();
         return response()->json([
             'user' => $user,
