@@ -23,11 +23,15 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
-        if ($this->method == 'POST') {
+        $id = null;
+        if ($this->route('user')) {
+            $id = $this->route('user')->id;
+        }
+        if ($this->method() == 'POST') {
             return [
                 'name' => 'required',
                 'lastname' => 'required',
-                'email' => 'required|email|unique:users,email,'.$this->id,
+                'email' => 'required|email|unique:users,email,',
                 'password' => 'required|confirmed|min:8',
                 'cellphone' => 'min:6|max:12',
                 'role_id' => 'required|exists:roles,id'
@@ -36,7 +40,7 @@ class UserRequest extends FormRequest
             return [
                 'name' => 'required',
                 'lastname' => 'required',
-                'email' => 'required|email|unique:users,email,'.$this->id,
+                'email' => 'required|email|unique:users,email,'.$id,
                 'cellphone' => 'min:6|max:12'
             ];
         }
@@ -50,6 +54,7 @@ class UserRequest extends FormRequest
             'email.email' => 'El correo electrónico no es válido.',
             'email.unique' => 'El correo electrónico se encuentra en uso.',
             'password.required' => 'La contraseña es obligatoria.',
+            'password.confirmed' => 'La confirmación de contraseña no coincide',
             'cellphone.min' => 'El número de celular debe contener al menos 6 caracteres',
             'cellphone.max' => 'El número de celular no puede contener más de 12 caracteres',
             'role_id.required' => 'El rol del usuario es obligatorio',

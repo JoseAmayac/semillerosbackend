@@ -11,7 +11,7 @@ class GroupController extends Controller
 {
     public function __construct()
     {
-        $this->middleware("checkauth")->only("store", "update", "delete");
+        $this->middleware("checkauth")->only("store", "update", "destroy");
     }
 
     public function getLatest(){
@@ -226,7 +226,7 @@ class GroupController extends Controller
         return response()->json([
             'group'=>$group,
             'message' => 'Grupo de investigación actualizada correctamente'
-        ], 201);
+        ], 200);
     }
 
     /**

@@ -23,8 +23,12 @@ class GroupRequest extends FormRequest
      */
     public function rules()
     {
+        $id = null;
+        if ($this->route('group')) {
+            $id = $this->route('group')->id;
+        }
         return [
-            'name'=>'required|string|unique:groups,name,'.$this->id,
+            'name'=>'required|string|unique:groups,name,'.$id,
             'description'=>'string',
             'department_id'=> 'required|exists:departments,id'
         ];
