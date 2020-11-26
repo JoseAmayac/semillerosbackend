@@ -27,6 +27,9 @@ Route::group([
     Route::post('refresh','App\Http\Controllers\Api\AuthController@refreshToken');
     Route::get('logout','App\Http\Controllers\Api\AuthController@logout');
     Route::get('me','App\Http\Controllers\Api\AuthController@me');
+    Route::post('resetPassword', 'App\Http\Controllers\Api\ResetPasswordController@create');
+    Route::get('findToken/{token}', 'App\Http\Controllers\Api\ResetPasswordController@find');
+    Route::post('recoverPassword', 'App\Http\Controllers\Api\ResetPasswordController@reset');
 });
 
 Route::group([

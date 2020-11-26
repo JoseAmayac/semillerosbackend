@@ -6,19 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use League\CommonMark\Inline\Element\Code;
 
 class PasswordResetRequest extends Notification
 {
     use Queueable;
 
+    private int $code;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($code)
     {
-        //
+        $this->code = $code;
     }
 
     /**
@@ -41,9 +43,11 @@ class PasswordResetRequest extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->greeting('Hola!')
+                    ->subject('Restablecimiento de contraseña')
+                    ->line('Este es el código para restablecer tu contraseña')
+                    ->line($this->code)
+                    ->salutation('Saludos');
     }
 
     /**

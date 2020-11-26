@@ -39,11 +39,12 @@ class ResetPasswordController extends Controller
 
     public function insertPasswordReset($user){
         //Sacar a otro metodo
+        $code = rand(100000, 999999);
         $passwordReset = PasswordReset::updateOrCreate(
             ['email' => $user->email],
             [
                 'email' => $user->email,
-                'token' => \Illuminate\Support\Str::random(60)
+                'token' => $code
             ]
         );
 
@@ -63,15 +64,17 @@ class ResetPasswordController extends Controller
 
         if (!$passwordReset)
             return response()->json([
-                'message' => 'El token de restablecimiento de contraseña no es valido.'
+                'message' => 'El código no es valido.'
             ], 404);
-        if (Carbon::parse($passwordReset->updated_at)->addMinutes(120)->isPast()) {
+        if (Carbon::parse($passwordReset->updated_at)->addMinutes(20)->isPast()) {
             $passwordReset->delete();
             return response()->json([
-                'message' => 'El token de restablecimiento de contraseña ya expiró.'
+                'message' => 'El código ya expiró.'
             ], 403);
         }
-        return response()->json($passwordReset);
+        return response()->json([
+            'passwordReset' => $passwordReset
+        ], 200);
     }
 
     /**
@@ -103,7 +106,7 @@ class ResetPasswordController extends Controller
                 'message' => 'No encontramos un usuario con ese correo electrónico.'
             ], 404);
         }
-        $user->password = $request->get('password');
+        $user->password = bcrypt($request->get('password'));
         $user->save();
         $passwordReset->delete();
 
