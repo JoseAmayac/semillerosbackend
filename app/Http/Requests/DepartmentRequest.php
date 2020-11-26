@@ -23,8 +23,12 @@ class DepartmentRequest extends FormRequest
      */
     public function rules()
     {
+        $id = null;
+        if ($this->route('department')) {
+            $id = $this->route('department')->id;
+        }
         return [
-            'name' => 'required|string|unique:departments,name,'.$this->id,
+            'name' => 'required|string|unique:departments,name,'.$id,
             'description' => 'string'
         ];
     }

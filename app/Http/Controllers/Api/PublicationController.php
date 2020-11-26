@@ -13,6 +13,7 @@ class PublicationController extends Controller
     public function __construct() 
     {
         $this->middleware('checkauth')->except('index','show');
+        $this->middleware('role:Semilleros general,Semilleros especifico')->except('index','show');
     }
 
     /**

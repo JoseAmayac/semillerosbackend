@@ -41,9 +41,11 @@ class PasswordResetSuccess extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->greeting('Hola de nuevo!')
+                    ->subject('Restablecimiento de contraseña correcto')
+                    ->line('Has restablecido tu contraseña correctamente, ahora puedes inciar sesión usando tu nueva contraseña')
+                    ->line('Gracias por usar nuestra aplicación!')
+                    ->salutation('Saludos');
     }
 
     /**

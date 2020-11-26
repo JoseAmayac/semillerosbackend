@@ -12,6 +12,7 @@ class GroupController extends Controller
     public function __construct()
     {
         $this->middleware("checkauth")->only("store", "update", "destroy");
+        $this->middleware('role:Administrador')->except('index','show','getLatest');
     }
 
     public function getLatest(){
@@ -149,9 +150,9 @@ class GroupController extends Controller
      */
     public function show(Group $group)
     {
-        $group -> seedlings;
-        $group -> lines;
-        $group -> publications;
+        $group->seedlings;
+        $group->lines;
+        $group->publications;
         return response()->json([
             'group' => $group
         ],200);

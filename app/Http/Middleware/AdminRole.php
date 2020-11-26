@@ -15,12 +15,18 @@ class AdminRole
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle(Request $request, Closure $next,$role)
+    public function handle(Request $request, Closure $next,$role,$role2 = null)
     {
         if (Auth::check() && Auth::user()) {
             $user = Auth::user();
-            if ($user->hasRole($role)) {
-                return $next($request);
+            if ($role2) {
+                if ($user->hasRole($role) || $user->hasRole($role2)) {
+                    return $next($request);
+                }
+            }else{
+                if ($user->hasRole($role)) {
+                    return $next($request);
+                }
             }
         }
 

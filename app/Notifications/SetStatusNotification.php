@@ -6,21 +6,23 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use League\CommonMark\Inline\Element\Code;
 
-class PasswordResetRequest extends Notification
+class SetStatusNotification extends Notification
 {
     use Queueable;
 
-    private $code;
+    private $type;
+    private $seedling;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($code)
+    public function __construct($type,$seedling)
     {
-        $this->code = $code;
+        $this->type = $type;
+        $this->seedling = $seedling;
     }
 
     /**
@@ -42,12 +44,19 @@ class PasswordResetRequest extends Notification
      */
     public function toMail($notifiable)
     {
+        $message = "";
+        if ($this->type == 1) {
+            $message = "aprobada, ya haces parte del semillero";
+        }else{
+            $message = "rechazada, puede volver a enviar su solicitud";
+        }
         return (new MailMessage)
                     ->greeting('Hola!')
-                    ->subject('Restablecimiento de contraseña')
-                    ->line('Este es el código para restablecer tu contraseña')
-                    ->line($this->code)
-                    ->salutation('Saludos');
+                    ->subject('Solicitud de participación a semillero de investigación')
+                    ->line('Tú solicitud de participación al semillero de investigación ' . $this->seedling . ' ha obtenido una respuesta')
+                    ->line('Su solicitud fue ' .$message)
+                    ->line('Gracias por usar nuestra aplicación!')
+                    ->salutation('Saludos!');
     }
 
     /**

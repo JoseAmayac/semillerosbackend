@@ -12,6 +12,7 @@ class DepartmentController extends Controller
     public function __construct()
     {
         $this->middleware('checkauth')->except('index','show');
+        $this->middleware('role:Administrador')->except('index','show');
     }
     /**
      * @OA\GET(

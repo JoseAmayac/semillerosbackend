@@ -12,6 +12,7 @@ class ProgramController extends Controller
     public function __construct()
     {
         $this->middleware("checkauth")->only("store", "update", "destroy");
+        $this->middleware('role:Administrador')->except('index','show');
     }
 
 

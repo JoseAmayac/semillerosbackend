@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware('checkauth')->except(['show', 'getTeachers']);
+        $this->middleware('checkauth')->except(['show', 'getTeachers','updatePassword']);
     }
 
     /**
