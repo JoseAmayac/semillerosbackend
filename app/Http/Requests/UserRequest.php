@@ -31,7 +31,7 @@ class UserRequest extends FormRequest
             return [
                 'name' => 'required',
                 'lastname' => 'required',
-                'email' => 'required|email|unique:users,email,',
+                'email' => 'required|email|unique:users,email,'. (int) $id,
                 'password' => 'required|confirmed|min:8',
                 'cellphone' => 'min:6|max:12',
                 'role_id' => 'required|exists:roles,id'
@@ -40,7 +40,7 @@ class UserRequest extends FormRequest
             return [
                 'name' => 'required',
                 'lastname' => 'required',
-                'email' => 'required|email|unique:users,email,'.(int) $id,
+                'email' => 'required|email|unique:users,email,'. (int) $id,
                 'cellphone' => 'min:6|max:12'
             ];
         }
