@@ -316,7 +316,7 @@ class AuthController extends Controller
         $http = new Client;
         $oClient = OClient::where('password_client', 1)->first();
 
-        $response = $http->post('https://uaminvestigando.herokuapp.com/oauth/token', [
+        $response = $http->post('https://laracasts.com/discuss/channel', [
             'form_params' => [
                 'grant_type' => 'refresh_token',
                 'refresh_token' => $request->refresh_token,
