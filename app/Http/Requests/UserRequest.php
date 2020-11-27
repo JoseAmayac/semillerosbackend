@@ -40,7 +40,7 @@ class UserRequest extends FormRequest
             return [
                 'name' => 'required',
                 'lastname' => 'required',
-                'email' => 'required|email|unique:users,email,'.$id,
+                'email' => 'required|email|unique:users,email,'.(int) $id,
                 'cellphone' => 'min:6|max:12'
             ];
         }

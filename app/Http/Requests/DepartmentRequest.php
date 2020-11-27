@@ -28,7 +28,7 @@ class DepartmentRequest extends FormRequest
             $id = $this->route('department')->id;
         }
         return [
-            'name' => 'required|string|unique:departments,name,'.$id,
+            'name' => 'required|string|unique:departments,name,'.(int) $id,
             'description' => 'string'
         ];
     }

@@ -28,7 +28,7 @@ class SeedlingRequest extends FormRequest
             $id = $this->route('seedling')->id;
         }
         return [
-            'name'=>'required|string|unique:seedlings,name,'.$id,
+            'name'=>'required|string|unique:seedlings,name,'.(int) $id,
             'description'=>'string',
             'group_id'=>'required|exists:groups,id'
         ];

@@ -28,7 +28,7 @@ class GroupRequest extends FormRequest
             $id = $this->route('group')->id;
         }
         return [
-            'name'=>'required|string|unique:groups,name,'.$id,
+            'name'=>'required|string|unique:groups,name,'.(int) $id,
             'description'=>'string',
             'department_id'=> 'required|exists:departments,id'
         ];
