@@ -316,7 +316,7 @@ class AuthController extends Controller
         $http = new Client;
         $oClient = OClient::where('password_client', 1)->first();
 
-        $response = $http->post('http://localhost:3190/oauth/token', [
+        $response = $http->post(app('url').'/oauth/token', [
             'form_params' => [
                 'grant_type' => 'refresh_token',
                 'refresh_token' => $request->refresh_token,
